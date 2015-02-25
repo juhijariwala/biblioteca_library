@@ -27,7 +27,6 @@ public class BibliotecaLibraryTest extends TestCase {
 
     }
 
-
     @Test
     public  void shouldGetListOfBookDetail(){
 

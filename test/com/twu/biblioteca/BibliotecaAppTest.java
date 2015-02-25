@@ -5,9 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -38,32 +36,33 @@ public class BibliotecaAppTest {
         Assert.assertEquals(menu,bibliotecaApp.displayMenu());
     }
     @Test
-    public void shouldTakeUserOptionAndCallOption() throws IOException {
-        ArrayList<Book> expectedBookList = new ArrayList<Book>();
-        expectedBookList.add(new Book("book1", "author1", "date1"));
-        expectedBookList.add(new Book("book2", "author2", "date2"));
-        expectedBookList.add(new Book("book3", "author3", "date3"));
-        String option="1";
-        Assert.assertTrue(checkEqualBookList(expectedBookList, bibliotecaApp.takeUserInput(new ByteArrayInputStream(option.getBytes()))));
+    public void should_take_user_option_ONE_and_call_getListOfBookDetail() throws IOException {
+        String input="1\n0";
+        InputStream in=new ByteArrayInputStream(input.getBytes());
+        OutputStream out = new ByteArrayOutputStream();
+        bibliotecaApp.takeUserInput(in,out);
+        final StringBuffer expectedOutput=new StringBuffer();
+        expectedOutput.append("\tTitle\tAuthor\tPublishedOn\n");
+        expectedOutput.append("\tbook1\tauthor1\tdate1\n");
+        expectedOutput.append("\tbook2\tauthor2\tdate2\n");
+        expectedOutput.append("\tbook3\tauthor3\tdate3\n");
+
+        Assert.assertEquals(expectedOutput.toString(), out.toString());
 
     }
+    @Test
+    public  void should_display_error_invalid_user_option() throws IOException {
+        String input="1\n4\n0";
+        InputStream in=new ByteArrayInputStream(input.getBytes());
+        OutputStream out = new ByteArrayOutputStream();
+        bibliotecaApp.takeUserInput(in,out);
+        final StringBuffer expectedOutput=new StringBuffer();
+        expectedOutput.append("\tTitle\tAuthor\tPublishedOn\n");
+        expectedOutput.append("\tbook1\tauthor1\tdate1\n");
+        expectedOutput.append("\tbook2\tauthor2\tdate2\n");
+        expectedOutput.append("\tbook3\tauthor3\tdate3\n");
+        expectedOutput.append("Select a valid option!");
 
-
-    private boolean checkEqualBookList(ArrayList<Book> expectedBookList, ArrayList<Book> actaualBookList) {
-
-        if(expectedBookList.size()==actaualBookList.size()){
-            for(int i=0;i<expectedBookList.size();i++){
-                if (expectedBookList.get(i).getTitle() != actaualBookList.get(i).getTitle()) {
-                    return false;
-                } else if (expectedBookList.get(i).getPublishDate() != actaualBookList.get(i).getPublishDate()) {
-                    return false;
-                } else if (expectedBookList.get(i).getAuthor() != actaualBookList.get(i).getAuthor()) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
+        Assert.assertEquals(expectedOutput.toString(), out.toString());
     }
-
 }
