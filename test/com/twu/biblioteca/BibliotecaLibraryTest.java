@@ -12,7 +12,6 @@ public class BibliotecaLibraryTest extends TestCase {
     @Before
     public void setUp(){
         bibliotecaLibrary= new BibliotecaLibrary();
-
         bibliotecaLibrary.addBook(new Book("book1", "author1", "date1"));
         bibliotecaLibrary.addBook(new Book("book2", "author2", "date2"));
         bibliotecaLibrary.addBook(new Book("book3", "author3", "date3"));
@@ -29,7 +28,6 @@ public class BibliotecaLibraryTest extends TestCase {
 
     @Test
     public  void shouldGetListOfBookDetail(){
-
         final StringBuffer expectedOutput=new StringBuffer();
         expectedOutput.append("\tTitle\tAuthor\tPublishedOn\n");
         expectedOutput.append("\tbook1\tauthor1\tdate1\n");
