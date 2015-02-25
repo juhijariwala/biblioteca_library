@@ -5,30 +5,15 @@ import java.util.ArrayList;
 
 public class BibliotecaApp {
 
-    private ArrayList<Book> bookList = new ArrayList<Book>();
+    private BibliotecaLibrary bibliotecaLibrary;
 
-    public void addBook(Book book) {
-        bookList.add(book);
-
+    public BibliotecaApp(BibliotecaLibrary bibliotecaLibrary) {
+        this.bibliotecaLibrary = bibliotecaLibrary;
     }
+
 
     public String displayWelcomeMessage() {
         return "Welcome to Bibliotica App!!";
-    }
-
-    public ArrayList<Book> getBookList() {
-        return bookList;
-    }
-
-    public String getListOfBookDetail() {
-        String listOfBookDetail = "";
-        listOfBookDetail = "\tTitle\tAuthor\tPublishedOn\n";
-        for (Book book : bookList) {
-
-            listOfBookDetail += book.printBookDetail();
-
-        }
-        return listOfBookDetail;
     }
 
     public String displayMenu() {
@@ -42,7 +27,7 @@ public class BibliotecaApp {
             displayMenu();
             choice = Integer.parseInt(reader.readLine());
             if (choice==1) {
-                return getBookList();
+                return bibliotecaLibrary.getBookList();
             }
 
         } while (choice != 0);
