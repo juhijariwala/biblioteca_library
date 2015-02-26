@@ -12,6 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class BibliotecaAppTest {
     private BibliotecaLibrary bibliotecaLibrary;
     private BibliotecaApp bibliotecaApp;
+    private MenuList menuList;
 
     @Before
     public void setUp() {
@@ -19,9 +20,17 @@ public class BibliotecaAppTest {
         bibliotecaLibrary.addBook(new Book("book1", "author1", "date1"));
         bibliotecaLibrary.addBook(new Book("book2", "author2", "date2"));
         bibliotecaLibrary.addBook(new Book("book3", "author3", "date3"));
-        bibliotecaLibrary.addCommand(1, new ListBookLibraryAction());
-        bibliotecaLibrary.addCommand(0, new QuitLibraryAction());
-        bibliotecaApp = new BibliotecaApp(bibliotecaLibrary);
+
+        InputStream in = null;
+        OutputStream out = new ByteArrayOutputStream();
+        menuList =new MenuList(bibliotecaLibrary,in,out);
+        menuList.addCommand(1, new ListBookLibraryAction());
+        menuList.addCommand(0, new QuitLibraryAction());
+        menuList.addCommand(2, new SearchBookLibraryAction());
+
+        bibliotecaApp = new BibliotecaApp(menuList);
+
+
     }
 
     @Test
@@ -77,4 +86,15 @@ public class BibliotecaAppTest {
         expectedOutput.append(bibliotecaApp.displayMenu());
         Assert.assertEquals(expectedOutput.toString(), out.toString());
     }
+//    @Test
+//    public void should_take_user_option_two() throws IOException {
+//        String input = "2\n0";
+//        InputStream in = new ByteArrayInputStream(input.getBytes());
+//        OutputStream out = new ByteArrayOutputStream();
+//        bibliotecaApp = new BibliotecaApp(menu);
+//        bibliotecaApp.takeUserInput(in, out);
+//        final StringBuffer expectedOutput = new StringBuffer();
+//        expectedOutput.append("Please enter book title:");
+//        Assert.assertEquals(expectedOutput.toString(), out.toString());
+//    }
 }

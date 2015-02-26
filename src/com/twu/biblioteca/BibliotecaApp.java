@@ -3,11 +3,10 @@ import java.io.*;
 
 public class BibliotecaApp {
 
-    private BibliotecaLibrary bibliotecaLibrary;
+    private MenuList menuList;
 
-
-    public BibliotecaApp(BibliotecaLibrary bibliotecaLibrary) {
-        this.bibliotecaLibrary = bibliotecaLibrary;
+    public BibliotecaApp(MenuList menuList) {
+        this.menuList = menuList;
     }
 
     public String displayWelcomeMessage() {
@@ -28,7 +27,7 @@ public class BibliotecaApp {
             outStream.print(displayMenu());
             choice = Integer.parseInt(reader.readLine());
             if(choice!=0) {
-                out = bibliotecaLibrary.executeCommand(choice);
+                out = menuList.executeCommand(choice);
                 outStream.print(out);
             }
 
@@ -43,12 +42,19 @@ public class BibliotecaApp {
             bibliotecaLibrary.addBook(new Book("book1", "author1", "date1"));
             bibliotecaLibrary.addBook(new Book("book2", "author2", "date2"));
             bibliotecaLibrary.addBook(new Book("book3", "author3", "date3"));
-            bibliotecaLibrary.addCommand(1,new ListBookLibraryAction());
-            bibliotecaLibrary.addCommand(0,new QuitLibraryAction());
-            BibliotecaApp bibliotecaApp=new BibliotecaApp(bibliotecaLibrary);
+
+            String input = "1\n0";
+            InputStream in = new ByteArrayInputStream(input.getBytes());
+            OutputStream out = new ByteArrayOutputStream();
+
+            MenuList menuList =new MenuList(bibliotecaLibrary,in,out);
+            menuList.addCommand(1, new ListBookLibraryAction());
+            menuList.addCommand(0, new QuitLibraryAction());
+            menuList.addCommand(2, new SearchBookLibraryAction());
+
+            BibliotecaApp bibliotecaApp=new BibliotecaApp(menuList);
+            bibliotecaApp.takeUserInput(System.in, System.out);
             bibliotecaApp.takeUserInput(System.in,System.out);
-
-
 
     }
 

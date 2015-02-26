@@ -31,8 +31,10 @@ public class Book {
 
     }
 
-    public String printBookDetail() {
-
+    @Override
+    public String toString() {
         return "\t" + title + "\t" + author + "\t" + publishDate + "\n";
     }
+
+
 }

@@ -1,14 +1,13 @@
 package com.twu.biblioteca;
 
-import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
 
-public class BibliotecaLibraryTest extends TestCase {
+public class BibliotecaLibraryTest {
     private BibliotecaLibrary bibliotecaLibrary;
+
     @Before
     public void setUp(){
         bibliotecaLibrary= new BibliotecaLibrary();
@@ -34,6 +33,14 @@ public class BibliotecaLibraryTest extends TestCase {
         expectedOutput.append("\tbook2\tauthor2\tdate2\n");
         expectedOutput.append("\tbook3\tauthor3\tdate3\n");
         Assert.assertEquals(expectedOutput.toString(), bibliotecaLibrary.getListOfBookDetail());
+    }
+    @Test
+    public void shouldSearchBook(){
+        ArrayList<Book> expectedBookList=new ArrayList<Book>();
+        expectedBookList.add(new Book("book3", "author3", "date3"));
+        ArrayList<Book> searchedBookList;
+        searchedBookList=bibliotecaLibrary.searchBook("book3");
+        Assert.assertTrue(checkEqualBookList(expectedBookList, searchedBookList));
     }
     private boolean checkEqualBookList(ArrayList<Book> expectedBookList, ArrayList<Book> actaualBookList) {
 
