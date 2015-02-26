@@ -47,10 +47,10 @@ public class BibliotecaApp {
             InputStream in = new ByteArrayInputStream(input.getBytes());
             OutputStream out = new ByteArrayOutputStream();
 
-            MenuList menuList =new MenuList(bibliotecaLibrary,in,out);
+            MenuList menuList =new MenuList(bibliotecaLibrary,System.in,System.out);
             menuList.addCommand(1, new ListBookLibraryAction());
             menuList.addCommand(0, new QuitLibraryAction());
-            menuList.addCommand(2, new SearchBookLibraryAction());
+            menuList.addCommand(2, new CheckOutBookLibraryAction());
 
             BibliotecaApp bibliotecaApp=new BibliotecaApp(menuList);
             bibliotecaApp.takeUserInput(System.in, System.out);

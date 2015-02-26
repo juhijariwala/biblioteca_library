@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
@@ -9,5 +10,5 @@ import java.util.ArrayList;
  */
 public interface LibraryAction {
 
-    public OutputStream performAction(BibliotecaLibrary bibliotecaLibrary) throws IOException;
+    public OutputStream performAction(BibliotecaLibrary bibliotecaLibrary,InputStream in, OutputStream out) throws IOException;
 }

@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
@@ -10,10 +11,10 @@ import java.io.OutputStream;
 public class ListBookLibraryAction implements LibraryAction{
 
     @Override
-    public OutputStream performAction(BibliotecaLibrary bibliotecaLibrary) throws IOException {
+    public OutputStream performAction(BibliotecaLibrary bibliotecaLibrary,InputStream in,OutputStream out) throws IOException {
         String bookDetailPrintStatement = bibliotecaLibrary.getListOfBookDetail();
         byte buf[]=bookDetailPrintStatement.getBytes();
-        OutputStream out = new ByteArrayOutputStream();
+        out = new ByteArrayOutputStream();
         out.write(buf);
         return out;
     }

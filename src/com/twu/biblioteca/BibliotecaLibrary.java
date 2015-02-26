@@ -28,7 +28,6 @@ public class BibliotecaLibrary {
     public ArrayList<Book> searchBook(String bookTitle) {
         ArrayList<Book> searchedBooks = new ArrayList<Book>();
         for (Book book : bookList) {
-
             if (book.getTitle().equals(bookTitle)) {
                 searchedBooks.add(book);
             }

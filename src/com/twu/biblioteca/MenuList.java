@@ -23,11 +23,10 @@ public class MenuList {
     }
 
     public OutputStream executeCommand(int choice) throws IOException {
-        OutputStream out = new ByteArrayOutputStream();
         PrintStream outStream = new PrintStream(out);
 
         if (libraryCommands.get(choice) != null) {
-            out = libraryCommands.get(choice).performAction(bibliotecaLibrary);
+            out = libraryCommands.get(choice).performAction(bibliotecaLibrary,in,out);
             outStream.print(out);
         } else {
 
