@@ -17,19 +17,13 @@ public class BibliotecaApp {
         return "****Menu****\nList Books : Press 1\nQuit : Press 0\nEnter your choice\n";
     }
 
-    public void takeUserInput(InputStream in, OutputStream out) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-        PrintStream outStream = new PrintStream(out);
+    public void takeUserInput(IODevice ioDevice) throws IOException {
         Integer choice;
-        outStream.print(displayWelcomeMessage());
-        do {
 
-            outStream.print(displayMenu());
-            choice = Integer.parseInt(reader.readLine());
-            if(choice!=0) {
-                out = menuList.executeCommand(choice);
-                outStream.print(out);
-            }
+        do {
+            ioDevice.write(displayMenu());
+            choice =Integer.parseInt(ioDevice.read());
+            menuList.executeCommand(choice);
 
         } while (choice != 0);
 
@@ -43,19 +37,13 @@ public class BibliotecaApp {
             bibliotecaLibrary.addBook(new Book("book2", "author2", "date2"));
             bibliotecaLibrary.addBook(new Book("book3", "author3", "date3"));
 
-            String input = "1\n0";
-            InputStream in = new ByteArrayInputStream(input.getBytes());
-            OutputStream out = new ByteArrayOutputStream();
-
-            MenuList menuList =new MenuList(bibliotecaLibrary,System.in,System.out);
+            MenuList menuList =new MenuList(bibliotecaLibrary,new SystemConsoleIODevice());
             menuList.addCommand(1, new ListBookLibraryAction());
             menuList.addCommand(0, new QuitLibraryAction());
             menuList.addCommand(2, new CheckOutBookLibraryAction());
 
             BibliotecaApp bibliotecaApp=new BibliotecaApp(menuList);
-            bibliotecaApp.takeUserInput(System.in, System.out);
-            bibliotecaApp.takeUserInput(System.in,System.out);
-
+            bibliotecaApp.takeUserInput(new SystemConsoleIODevice());
     }
 
 }

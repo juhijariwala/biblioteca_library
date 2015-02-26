@@ -21,14 +21,15 @@ public class CheckOutBookLibraryActionTest  {
     @Test
     public void should_ask_user_for_book_title() throws IOException {
         String input = "book1\nbook1";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        OutputStream out = new ByteArrayOutputStream();
-        menuList =new MenuList(bibliotecaLibrary,in,out);
+        ByteConsoleIODevice ioDevice=new ByteConsoleIODevice(input);
+        menuList =new MenuList(bibliotecaLibrary,ioDevice);
 
-        OutputStream actualOut;
         CheckOutBookLibraryAction checkOutBookLibraryAction=new CheckOutBookLibraryAction();
-        actualOut=checkOutBookLibraryAction.performAction(bibliotecaLibrary,in,out);
-        Assert.assertEquals("\nPlease enter Book Title: ", actualOut.toString());
+        checkOutBookLibraryAction.performAction(bibliotecaLibrary,ioDevice);
+        final StringBuffer expectedOutput = new StringBuffer();
+        expectedOutput.append("You have checked out the below book:\n");
+        expectedOutput.append("\tbook1\tauthor1\tdate1\n");
+        Assert.assertEquals(expectedOutput.toString(), ioDevice.out.toString());
     }
 
 }

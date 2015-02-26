@@ -1,10 +1,8 @@
 package com.twu.biblioteca;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class BibliotecaLibrary {
-    private ArrayList<Book> bookList = new ArrayList<Book>();
+    private  ArrayList<Book> bookList = new ArrayList<Book>();
 
 
     public void addBook(Book book) {
@@ -35,6 +33,12 @@ public class BibliotecaLibrary {
         return searchedBooks;
     }
 
-
-
+    public Book checkout(String bookTitle) {
+        if(searchBook(bookTitle).size() !=0){
+            Book book=searchBook(bookTitle).get(0);
+            bookList.remove(book);
+            return book;
+        }
+        return null;
+    }
 }

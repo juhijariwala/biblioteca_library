@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -8,8 +9,8 @@ import java.io.OutputStream;
  */
 public class QuitLibraryAction implements LibraryAction {
     @Override
-    public OutputStream performAction(BibliotecaLibrary bibliotecaLibrary,InputStream in,OutputStream out) {
-        System.exit(0);
-        return null;
+    public void performAction(BibliotecaLibrary bibliotecaLibrary,IODevice ioDevice) throws IOException {
+        ioDevice.write("Successfully Exited!!\n");
+//        System.exit(0);
     }
 }

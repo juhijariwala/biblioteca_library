@@ -10,5 +10,5 @@ import java.util.ArrayList;
  */
 public interface LibraryAction {
 
-    public OutputStream performAction(BibliotecaLibrary bibliotecaLibrary,InputStream in, OutputStream out) throws IOException;
+    public void performAction(BibliotecaLibrary bibliotecaLibrary,IODevice ioDevice) throws IOException;
 }

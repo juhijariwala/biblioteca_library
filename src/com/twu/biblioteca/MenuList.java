@@ -1,42 +1,31 @@
 package com.twu.biblioteca;
-
 import java.io.*;
 import java.util.HashMap;
 
-/**
- * Created by juhijariwala on 26/02/15.
- */
 public class MenuList {
 
     private HashMap<Integer, LibraryAction> libraryCommands = new HashMap<Integer, LibraryAction>();
     private BibliotecaLibrary bibliotecaLibrary;
-    private OutputStream out;
-    private  InputStream in;
+    IODevice ioDevice;
 
-    public MenuList(BibliotecaLibrary bibliotecaLibrary, InputStream in, OutputStream out) {
+    public MenuList(BibliotecaLibrary bibliotecaLibrary, IODevice ioDevice) {
         this.bibliotecaLibrary=bibliotecaLibrary;
-        this.out = out;
-        this.in=in;
+        this.ioDevice=ioDevice;
     }
     public void addCommand(Integer choice, LibraryAction libraryAction) {
         libraryCommands.put(choice, libraryAction);
     }
 
-    public OutputStream executeCommand(int choice) throws IOException {
-        PrintStream outStream = new PrintStream(out);
+    public void executeCommand(int choice) throws IOException {
 
         if (libraryCommands.get(choice) != null) {
-            out = libraryCommands.get(choice).performAction(bibliotecaLibrary,in,out);
-            outStream.print(out);
+             libraryCommands.get(choice).performAction(bibliotecaLibrary,ioDevice);
         } else {
 
             String error = "Select a valid option!\n";
-            OutputStream invalidOut = new ByteArrayOutputStream();
-            invalidOut.write(error.getBytes());
-            outStream.print(invalidOut);
+            ioDevice.write(error);
 
         }
-        return out;
     }
 
 }
