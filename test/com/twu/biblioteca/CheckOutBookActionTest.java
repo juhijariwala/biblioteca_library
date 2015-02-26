@@ -1,12 +1,15 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Library.BibliotecaLibrary;
+import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.action.CheckOutBookAction;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
 
-public class CheckOutBookLibraryActionTest  {
+public class CheckOutBookActionTest {
     private BibliotecaLibrary bibliotecaLibrary;
     private MenuList menuList;
     @Before
@@ -24,12 +27,12 @@ public class CheckOutBookLibraryActionTest  {
         ByteConsoleIODevice ioDevice=new ByteConsoleIODevice(input);
         menuList =new MenuList(bibliotecaLibrary,ioDevice);
 
-        CheckOutBookLibraryAction checkOutBookLibraryAction=new CheckOutBookLibraryAction();
+        CheckOutBookAction checkOutBookLibraryAction=new CheckOutBookAction();
         checkOutBookLibraryAction.performAction(bibliotecaLibrary,ioDevice);
         final StringBuffer expectedOutput = new StringBuffer();
-        expectedOutput.append("You have checked out the below book:\n");
-        expectedOutput.append("\tbook1\tauthor1\tdate1\n");
+        expectedOutput.append("Thank you! Enjoy the book\n");
         Assert.assertEquals(expectedOutput.toString(), ioDevice.out.toString());
     }
+
 
 }

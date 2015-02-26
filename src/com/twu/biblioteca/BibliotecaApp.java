@@ -1,4 +1,11 @@
 package com.twu.biblioteca;
+import com.twu.biblioteca.IODevice.IODevice;
+import com.twu.biblioteca.Library.BibliotecaLibrary;
+import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.action.CheckOutBookAction;
+import com.twu.biblioteca.action.ListBookAction;
+import com.twu.biblioteca.action.QuitAction;
+
 import java.io.*;
 
 public class BibliotecaApp {
@@ -18,6 +25,8 @@ public class BibliotecaApp {
     }
 
     public void takeUserInput(IODevice ioDevice) throws IOException {
+
+
         Integer choice;
 
         do {
@@ -38,9 +47,9 @@ public class BibliotecaApp {
             bibliotecaLibrary.addBook(new Book("book3", "author3", "date3"));
 
             MenuList menuList =new MenuList(bibliotecaLibrary,new SystemConsoleIODevice());
-            menuList.addCommand(1, new ListBookLibraryAction());
-            menuList.addCommand(0, new QuitLibraryAction());
-            menuList.addCommand(2, new CheckOutBookLibraryAction());
+            menuList.addCommand(1, new ListBookAction());
+            menuList.addCommand(0, new QuitAction());
+            menuList.addCommand(2, new CheckOutBookAction());
 
             BibliotecaApp bibliotecaApp=new BibliotecaApp(menuList);
             bibliotecaApp.takeUserInput(new SystemConsoleIODevice());

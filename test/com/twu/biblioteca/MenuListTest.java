@@ -1,5 +1,8 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Library.BibliotecaLibrary;
+import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.action.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,9 +27,9 @@ public class MenuListTest {
         String input="1\n0";
         ByteConsoleIODevice ioDevice=new ByteConsoleIODevice(input);
         menuList=new MenuList(bibliotecaLibrary,ioDevice);
-        menuList.addCommand(1,new ListBookLibraryAction());
-        menuList.addCommand(2,new SearchBookLibraryAction());
-        menuList.addCommand(0, new QuitLibraryAction());
+        menuList.addCommand(1,new ListBookAction());
+        menuList.addCommand(2,new SearchBookAction());
+        menuList.addCommand(0, new QuitAction());
 
     }
     @Test
@@ -34,9 +37,9 @@ public class MenuListTest {
         String input="1";
         ByteConsoleIODevice ioDevice=new ByteConsoleIODevice(input);
         menuList=new MenuList(bibliotecaLibrary,ioDevice);
-        menuList.addCommand(1,new ListBookLibraryAction());
-        menuList.addCommand(2,new SearchBookLibraryAction());
-        menuList.addCommand(0, new QuitLibraryAction());
+        menuList.addCommand(1,new ListBookAction());
+        menuList.addCommand(2,new SearchBookAction());
+        menuList.addCommand(0, new QuitAction());
         menuList.executeCommand(1);
         final StringBuffer expectedOutput = new StringBuffer();
         expectedOutput.append("\tTitle\tAuthor\tPublishedOn\n");
@@ -51,9 +54,9 @@ public class MenuListTest {
         String input="0";
         ByteConsoleIODevice ioDevice=new ByteConsoleIODevice(input);
         menuList=new MenuList(bibliotecaLibrary,ioDevice);
-        menuList.addCommand(1,new ListBookLibraryAction());
-        menuList.addCommand(2,new SearchBookLibraryAction());
-        menuList.addCommand(0, new QuitLibraryAction());
+        menuList.addCommand(1,new ListBookAction());
+        menuList.addCommand(2,new SearchBookAction());
+        menuList.addCommand(0, new QuitAction());
         menuList.executeCommand(0);
         final StringBuffer expectedOutput = new StringBuffer();
         expectedOutput.append("Successfully Exited!!\n");
@@ -64,14 +67,58 @@ public class MenuListTest {
         String input="book1\nbook1";
         ByteConsoleIODevice ioDevice=new ByteConsoleIODevice(input);
         menuList=new MenuList(bibliotecaLibrary,ioDevice);
-        menuList.addCommand(1,new ListBookLibraryAction());
-        menuList.addCommand(2,new CheckOutBookLibraryAction());
-        menuList.addCommand(0, new QuitLibraryAction());
+        menuList.addCommand(1,new ListBookAction());
+        menuList.addCommand(2,new CheckOutBookAction());
+        menuList.addCommand(0, new QuitAction());
         menuList.executeCommand(2);
         final StringBuffer expectedOutput = new StringBuffer();
-        expectedOutput.append("You have checked out the below book:\n");
+        expectedOutput.append("Thank you! Enjoy the book\n");
+        Assert.assertEquals(expectedOutput.toString(),ioDevice.out.toString());
+    }
+    @Test
+    public void should_notify_if_book_is_not_available() throws IOException {
+        String input="book12\nbook14";
+        ByteConsoleIODevice ioDevice=new ByteConsoleIODevice(input);
+        menuList=new MenuList(bibliotecaLibrary,ioDevice);
+        menuList.addCommand(1,new ListBookAction());
+        menuList.addCommand(2,new CheckOutBookAction());
+        menuList.addCommand(0, new QuitAction());
+        menuList.executeCommand(2);
+        final StringBuffer expectedOutput = new StringBuffer();
+        expectedOutput.append("That book is not available\n");
+        Assert.assertEquals(expectedOutput.toString(),ioDevice.out.toString());
+    }
+    @Test
+    public void should_return_book_given_input_Three() throws IOException {
+        String input="book1\nbook1\nbook1";
+        ByteConsoleIODevice ioDevice=new ByteConsoleIODevice(input);
+        menuList=new MenuList(bibliotecaLibrary,ioDevice);
+        menuList.addCommand(1,new ListBookAction());
+        menuList.addCommand(2,new CheckOutBookAction());
+        menuList.addCommand(0, new QuitAction());
+        menuList.addCommand(3, new ReturnBookAction());
+        menuList.executeCommand(2);
+        menuList.executeCommand(3);
+        final StringBuffer expectedOutput = new StringBuffer();
+        expectedOutput.append("\tTitle\tAuthor\tPublishedOn\n");
+        expectedOutput.append("\tbook2\tauthor2\tdate2\n");
+        expectedOutput.append("\tbook3\tauthor3\tdate3\n");
         expectedOutput.append("\tbook1\tauthor1\tdate1\n");
         Assert.assertEquals(expectedOutput.toString(),ioDevice.out.toString());
     }
-
+    @Test
+    public void should_give_error_message_on_invalid_bookreturn() throws IOException {
+        String input="book1\nbook1\nbook4";
+        ByteConsoleIODevice ioDevice=new ByteConsoleIODevice(input);
+        menuList=new MenuList(bibliotecaLibrary,ioDevice);
+        menuList.addCommand(1,new ListBookAction());
+        menuList.addCommand(2,new CheckOutBookAction());
+        menuList.addCommand(0, new QuitAction());
+        menuList.addCommand(3, new ReturnBookAction());
+        menuList.executeCommand(2);
+        menuList.executeCommand(3);
+        final StringBuffer expectedOutput = new StringBuffer();
+        expectedOutput.append("That book is not available\n");
+        Assert.assertEquals(expectedOutput.toString(),ioDevice.out.toString());
+    }
 }

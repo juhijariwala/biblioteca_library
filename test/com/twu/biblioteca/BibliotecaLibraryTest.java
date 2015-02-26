@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Library.BibliotecaLibrary;
+import com.twu.biblioteca.Library.Book;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

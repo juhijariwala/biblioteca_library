@@ -1,12 +1,17 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Library.BibliotecaLibrary;
+import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.action.ListBookAction;
+import com.twu.biblioteca.action.QuitAction;
+import com.twu.biblioteca.action.SearchBookAction;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
 
-public class SearchBookLibraryActionTest  {
+public class SearchBookActionTest {
     private BibliotecaLibrary bibliotecaLibrary;
     private MenuList menuList;
     private ByteConsoleIODevice ioDevice;
@@ -19,13 +24,13 @@ public class SearchBookLibraryActionTest  {
         String input = "book1";
         ioDevice=new ByteConsoleIODevice(input);
         menuList =new MenuList(bibliotecaLibrary,ioDevice);
-        menuList.addCommand(1, new ListBookLibraryAction());
-        menuList.addCommand(0, new QuitLibraryAction());
-        menuList.addCommand(2, new SearchBookLibraryAction());
+        menuList.addCommand(1, new ListBookAction());
+        menuList.addCommand(0, new QuitAction());
+        menuList.addCommand(2, new SearchBookAction());
     }
     @Test
     public void should_search_book_PerformAction() throws IOException {
-        SearchBookLibraryAction searchBookLibraryAction=new SearchBookLibraryAction();
+        SearchBookAction searchBookLibraryAction=new SearchBookAction();
         searchBookLibraryAction.performAction(bibliotecaLibrary,ioDevice);
         final StringBuffer expectedOutput = new StringBuffer();
         expectedOutput.append("\tbook1\tauthor1\tdate1\n");
