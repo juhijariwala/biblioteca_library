@@ -11,12 +11,19 @@ public class LibraryPrintingFormat {
 
 
     public String printBook(Book book) {
-        return "\t" + book.getTitle() + "\t" + book.getAuthor() + "\t" + book.getPublishDate() + "\n";
+        String format = "%1$-20s %2$-20s %3$-20s\n";
+        return (String.format(format, book.getTitle(), book.getAuthor(), book.getPublishDate()));
+
     }
 
     public String printLibrayBooks(ArrayList<Book> bookList) {
         String listOfBookDetail;
-        listOfBookDetail = "\tTitle\tAuthor\tPublishedOn\n";
+        String format = "%1$-20s %2$-20s %3$-20s\n";
+        listOfBookDetail="******************************************************\n";
+        listOfBookDetail+=String.format(format, "Title", "Author", "PublishedOn");
+        listOfBookDetail+="*****************************************************\n";
+
+
         for (Book book : bookList) {
 
             listOfBookDetail += printBook(book);

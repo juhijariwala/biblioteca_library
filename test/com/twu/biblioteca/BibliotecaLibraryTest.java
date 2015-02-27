@@ -31,20 +31,29 @@ public class BibliotecaLibraryTest {
     }
 
     @Test
-    public  void shouldGetListOfBookDetail(){
-        final StringBuffer expectedOutput=new StringBuffer();
-        expectedOutput.append("\tTitle\tAuthor\tPublishedOn\n");
-        expectedOutput.append("\tbook1\tauthor1\tdate1\n");
-        expectedOutput.append("\tbook2\tauthor2\tdate2\n");
-        expectedOutput.append("\tbook3\tauthor3\tdate3\n");
-        Assert.assertEquals(expectedOutput.toString(), libraryPrintingFormat.printLibrayBooks(bibliotecaLibrary.getBookList()) );
-    }
-    @Test
     public void shouldSearchBook(){
         ArrayList<Book> expectedBookList=new ArrayList<Book>();
         expectedBookList.add(new Book("book3", "author3", "date3"));
         ArrayList<Book> searchedBookList;
         searchedBookList=bibliotecaLibrary.searchBook("book3");
+        Assert.assertTrue(checkEqualBookList(expectedBookList, searchedBookList));
+    }
+    @Test
+    public void shouldCheckoutBook(){
+        Book expectedBook= new Book("book3", "author3", "date3");
+        Book checkedoutBook;
+        checkedoutBook=bibliotecaLibrary.checkout("book3");
+        Assert.assertEquals(expectedBook.getTitle(), checkedoutBook.getTitle());
+    }
+    @Test
+    public void shouldReturnBook(){
+        ArrayList<Book> expectedBookList=new ArrayList<Book>();
+        expectedBookList.add(new Book("book1", "author1", "date1"));
+        expectedBookList.add(new Book("book2", "author2", "date2"));
+        expectedBookList.add(new Book("book3", "author3", "date3"));
+        Book checkedoutBook = bibliotecaLibrary.checkout("book3");
+        ArrayList<Book> searchedBookList;
+        searchedBookList=bibliotecaLibrary.returnBook("book3");
         Assert.assertTrue(checkEqualBookList(expectedBookList, searchedBookList));
     }
     private boolean checkEqualBookList(ArrayList<Book> expectedBookList, ArrayList<Book> actaualBookList) {

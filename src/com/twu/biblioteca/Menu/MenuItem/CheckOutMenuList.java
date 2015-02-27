@@ -18,10 +18,11 @@ public class CheckOutMenuList implements MenuItem {
     public void performAction(BibliotecaLibrary bibliotecaLibrary, IODevice ioDevice) throws IOException {
         Integer choice=-1;
         do{
-            ioDevice.write("*****Checkout Menu*****\n");
-            ioDevice.write("Search Book : Press 4\n");
-            ioDevice.write("Check out Book : Press 5\n");
-            ioDevice.write("Quit from the Checkout Menu : Press 6\n");
+            String menuStatement="****************Checkout Menu****************\n";
+            menuStatement+="|\tSearch Book : Press 1\n";
+            menuStatement+="|\tCheck out Book : Press 2\n";
+            menuStatement+="|\tQuit from the Checkout Menu : Press 0\n";
+            ioDevice.write(menuStatement);
             try {
                 choice = Integer.parseInt(ioDevice.read());
                 menuList.executeCommand(choice);

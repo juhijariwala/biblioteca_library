@@ -21,22 +21,22 @@ public class BibliotecaApp {
     }
 
     public String displayMenu() {
-        return "****Menu****\nList Books : Press 1\n" +
-                "Check Out Book : Press 2\n" +
-                "Return Book : Press 3\nQuit : Press 0\nEnter your choice\n";
+        return "*************************Menu************************\n|\tList Books : Press 1\t\n" +
+                "|\tCheck Out Book : Press 2\t\n" +
+                "|\tReturn Book : Press 3\t\n|\tQuit : Press 0\t\n*****************************************************\n" +
+                "\nEnter your choice:";
     }
 
     public void takeUserInput(IODevice ioDevice) throws IOException {
 
-        Integer choice=-1;
+        Integer choice = -1;
         ioDevice.write(displayWelcomeMessage());
         do {
             ioDevice.write(displayMenu());
             try {
                 choice = Integer.parseInt(ioDevice.read());
                 menuList.executeCommand(choice);
-            }
-            catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 ioDevice.write("Invalid Option!\n");
             }
 
@@ -48,18 +48,21 @@ public class BibliotecaApp {
 
         BibliotecaLibrary bibliotecaLibrary;
         bibliotecaLibrary = new BibliotecaLibrary();
-        bibliotecaLibrary.addBook(new Book("book1", "author1", "date1"));
-        bibliotecaLibrary.addBook(new Book("book2", "author2", "date2"));
-        bibliotecaLibrary.addBook(new Book("book3", "author3", "date3"));
+        bibliotecaLibrary.addBook(new Book("two states", "Chetan Bhagat", "1/09/2014"));
+        bibliotecaLibrary.addBook(new Book("wings of fire", "APJ Abdul Kalam", "12/1/1999"));
+        bibliotecaLibrary.addBook(new Book("Harry Potter", "J. K. Rowling", "04/10/2001"));
 
         MenuList menuList = new MenuList(bibliotecaLibrary, new SystemConsoleIODevice());
         menuList.addCommand(1, new ListBookMenuItem());
         menuList.addCommand(0, new QuitMenuItem());
-        menuList.addCommand(2,new CheckOutMenuList(menuList));
         menuList.addCommand(3, new ReturnBookMenuItem());
-        menuList.addCommand(4, new SearchBookMenuItem());
-        menuList.addCommand(5, new CheckOutBookMenuItem());
 
+        MenuList checkoutSubmenuList = new MenuList(bibliotecaLibrary, new SystemConsoleIODevice());
+        menuList.addCommand(2, new CheckOutMenuList(checkoutSubmenuList));
+
+        checkoutSubmenuList.addCommand(1, new SearchBookMenuItem());
+        checkoutSubmenuList.addCommand(2, new CheckOutBookMenuItem());
+        checkoutSubmenuList.addCommand(0, new QuitMenuItem());
         BibliotecaApp bibliotecaApp = new BibliotecaApp(menuList);
         bibliotecaApp.takeUserInput(new SystemConsoleIODevice());
     }

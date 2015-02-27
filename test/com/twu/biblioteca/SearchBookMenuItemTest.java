@@ -16,6 +16,7 @@ public class SearchBookMenuItemTest {
     private BibliotecaLibrary bibliotecaLibrary;
     private MenuList menuList;
     private ByteStreamIODevice ioDevice;
+    String format = "%1$-20s %2$-20s %3$-20s\n";
     @Before
     public void setUp(){
         bibliotecaLibrary= new BibliotecaLibrary();
@@ -36,8 +37,10 @@ public class SearchBookMenuItemTest {
         SearchBookMenuItem searchBookLibraryAction=new SearchBookMenuItem();
         searchBookLibraryAction.performAction(bibliotecaLibrary,ioDevice);
         final StringBuffer expectedOutput = new StringBuffer();
-        expectedOutput.append("\tTitle\tAuthor\tPublishedOn\n");
-        expectedOutput.append("\tbook1\tauthor1\tdate1\n");
+        expectedOutput.append("******************************************************\n");
+        expectedOutput.append(String.format(format, "Title", "Author", "PublishedOn"));
+        expectedOutput.append("*****************************************************\n");
+        expectedOutput.append(String.format(format, "book1", "author1", "date1"));
         Assert.assertEquals(expectedOutput.toString(),ioDevice.out.toString());
 
 
