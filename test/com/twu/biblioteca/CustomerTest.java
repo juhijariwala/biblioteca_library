@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.Library.Book;
-import com.twu.biblioteca.customer.Customer;
+import com.twu.biblioteca.Customer.Customer;
 import org.junit.Assert;
 import org.junit.Test;
 

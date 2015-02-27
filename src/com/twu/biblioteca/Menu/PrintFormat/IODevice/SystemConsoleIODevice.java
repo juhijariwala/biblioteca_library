@@ -1,6 +1,4 @@
-package com.twu.biblioteca;
-
-import com.twu.biblioteca.IODevice.IODevice;
+package com.twu.biblioteca.Menu.PrintFormat.IODevice;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +16,7 @@ public class SystemConsoleIODevice implements IODevice {
     @Override
     public String read() throws IOException {
 
-        BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         return bufferedReader.readLine();
     }
 }

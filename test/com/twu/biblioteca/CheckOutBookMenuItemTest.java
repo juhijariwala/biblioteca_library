@@ -2,14 +2,15 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.Library.BibliotecaLibrary;
 import com.twu.biblioteca.Library.Book;
-import com.twu.biblioteca.action.CheckOutBookAction;
+import com.twu.biblioteca.Menu.MenuItem.MenuList;
+import com.twu.biblioteca.Menu.MenuItem.CheckOutBookMenuItem;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
 
-public class CheckOutBookActionTest {
+public class CheckOutBookMenuItemTest {
     private BibliotecaLibrary bibliotecaLibrary;
     private MenuList menuList;
     @Before
@@ -24,10 +25,10 @@ public class CheckOutBookActionTest {
     @Test
     public void should_ask_user_for_book_title() throws IOException {
         String input = "book1\nbook1";
-        ByteConsoleIODevice ioDevice=new ByteConsoleIODevice(input);
+        ByteStreamIODevice ioDevice=new ByteStreamIODevice(input);
         menuList =new MenuList(bibliotecaLibrary,ioDevice);
 
-        CheckOutBookAction checkOutBookLibraryAction=new CheckOutBookAction();
+        CheckOutBookMenuItem checkOutBookLibraryAction=new CheckOutBookMenuItem();
         checkOutBookLibraryAction.performAction(bibliotecaLibrary,ioDevice);
         final StringBuffer expectedOutput = new StringBuffer();
         expectedOutput.append("Thank you! Enjoy the book\n");

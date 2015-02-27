@@ -1,11 +1,11 @@
 package com.twu.biblioteca;
 
 
+import com.twu.biblioteca.App.BibliotecaApp;
 import com.twu.biblioteca.Library.BibliotecaLibrary;
 import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.Menu.MenuItem.MenuList;
 import org.junit.Before;
-
-import static org.junit.Assert.assertEquals;
 
 public class BibliotecaAppTest {
     private BibliotecaLibrary bibliotecaLibrary;

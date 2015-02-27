@@ -1,16 +1,18 @@
-package com.twu.biblioteca.Action;
+package com.twu.biblioteca.Menu.MenuItem;
 
 import com.twu.biblioteca.Library.BibliotecaLibrary;
 import com.twu.biblioteca.Library.Book;
-import com.twu.biblioteca.IODevice.IODevice;
+import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
+import com.twu.biblioteca.Menu.PrintFormat.LibraryPrintingFormat;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Created by juhijariwala on 26/02/15.
  */
-public class SearchBookAction implements Action {
+public class SearchBookMenuItem implements MenuItem {
+    LibraryPrintingFormat libraryPrintingFormat =new LibraryPrintingFormat();
     @Override
     public void performAction(BibliotecaLibrary bibliotecaLibrary, IODevice ioDevice) throws IOException {
         String msg = "\n" +
@@ -18,12 +20,11 @@ public class SearchBookAction implements Action {
         ioDevice.write(msg);
         String bookTitle = ioDevice.read();
         ArrayList<Book> searchedBookList = bibliotecaLibrary.searchBook(bookTitle);
-        String output = "";
-        for (Book book : searchedBookList) {
-            output += book.toString();
+        if(searchedBookList.size()!=0)
+            ioDevice.write(libraryPrintingFormat.printLibrayBooks(searchedBookList));
+        else
+            ioDevice.write("Invalid book\n");
         }
-        ioDevice.write(output);
-    }
 
 
 }

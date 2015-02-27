@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.Library.BibliotecaLibrary;
 import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.Menu.PrintFormat.LibraryPrintingFormat;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 public class BibliotecaLibraryTest {
     private BibliotecaLibrary bibliotecaLibrary;
+    private LibraryPrintingFormat libraryPrintingFormat;
 
     @Before
     public void setUp(){
@@ -16,6 +18,7 @@ public class BibliotecaLibraryTest {
         bibliotecaLibrary.addBook(new Book("book1", "author1", "date1"));
         bibliotecaLibrary.addBook(new Book("book2", "author2", "date2"));
         bibliotecaLibrary.addBook(new Book("book3", "author3", "date3"));
+        libraryPrintingFormat =new LibraryPrintingFormat();
     }
     @Test
     public void shouldGetListOfBooks() {
@@ -34,7 +37,7 @@ public class BibliotecaLibraryTest {
         expectedOutput.append("\tbook1\tauthor1\tdate1\n");
         expectedOutput.append("\tbook2\tauthor2\tdate2\n");
         expectedOutput.append("\tbook3\tauthor3\tdate3\n");
-        Assert.assertEquals(expectedOutput.toString(), bibliotecaLibrary.getListOfBookDetail());
+        Assert.assertEquals(expectedOutput.toString(), libraryPrintingFormat.printLibrayBooks(bibliotecaLibrary.getBookList()) );
     }
     @Test
     public void shouldSearchBook(){

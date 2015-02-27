@@ -1,18 +1,18 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.IODevice.IODevice;
+import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 
 import java.io.*;
 
 /**
  * Created by juhijariwala on 26/02/15.
  */
-public class ByteConsoleIODevice implements IODevice {
+public class ByteStreamIODevice implements IODevice {
     public InputStream in ;
     public OutputStream out;
     private BufferedReader br;
 
-    public ByteConsoleIODevice(String message) {
+    public ByteStreamIODevice(String message) {
 
         in = new ByteArrayInputStream(message.getBytes());
         br=new BufferedReader(new InputStreamReader(in));
@@ -31,7 +31,6 @@ public class ByteConsoleIODevice implements IODevice {
 
     @Override
     public String read() throws IOException {
-
 
         return br.readLine();
     }

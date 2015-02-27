@@ -1,8 +1,5 @@
 package com.twu.biblioteca.Library;
 
-/**
- * Created by juhijariwala on 25/02/15.
- */
 public class Book {
 
 
@@ -31,10 +28,6 @@ public class Book {
 
     }
 
-    @Override
-    public String toString() {
-        return "\t" + title + "\t" + author + "\t" + publishDate + "\n";
-    }
 
 
 }
