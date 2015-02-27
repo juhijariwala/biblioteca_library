@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.twu.biblioteca.MenuListTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2015-02-27T12:38:41" hostname="INjuhijari.local" time="0.009">
+  <properties/>
+  <testcase name="should_excute_command_given_input_ONE" classname="com.twu.biblioteca.MenuListTest" time="0.001"/>
+  <testcase name="should_show_checkout_menu" classname="com.twu.biblioteca.MenuListTest" time="0.002"/>
+  <testcase name="should_excute_command_checkout_given_input_TWO" classname="com.twu.biblioteca.MenuListTest" time="0.0"/>
+  <testcase name="should_return_book_given_input_Three" classname="com.twu.biblioteca.MenuListTest" time="0.001"/>
+  <testcase name="should_notify_if_book_is_not_available" classname="com.twu.biblioteca.MenuListTest" time="0.0"/>
+  <testcase name="should_quit_on_execute_command_given_input_ZERO" classname="com.twu.biblioteca.MenuListTest" time="0.0"/>
+  <testcase name="should_give_error_message_on_invalid_bookreturn" classname="com.twu.biblioteca.MenuListTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
