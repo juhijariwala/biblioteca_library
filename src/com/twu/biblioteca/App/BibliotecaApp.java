@@ -48,9 +48,9 @@ public class BibliotecaApp {
 
         BibliotecaLibrary bibliotecaLibrary;
         bibliotecaLibrary = new BibliotecaLibrary();
-        bibliotecaLibrary.addBook(new Book("two states", "Chetan Bhagat", "1/09/2014"));
-        bibliotecaLibrary.addBook(new Book("wings of fire", "APJ Abdul Kalam", "12/1/1999"));
-        bibliotecaLibrary.addBook(new Book("Harry Potter", "J. K. Rowling", "04/10/2001"));
+        bibliotecaLibrary.getBookLibrary().addBook(new Book("two states", "Chetan Bhagat", "1/09/2014"));
+        bibliotecaLibrary.getBookLibrary().addBook(new Book("wings of fire", "APJ Abdul Kalam", "12/1/1999"));
+        bibliotecaLibrary.getBookLibrary().addBook(new Book("Harry Potter", "J. K. Rowling", "04/10/2001"));
 
         MenuList menuList = new MenuList(bibliotecaLibrary, new SystemConsoleIODevice());
         menuList.addCommand(1, new ListBookMenuItem());

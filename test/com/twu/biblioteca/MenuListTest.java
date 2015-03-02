@@ -20,9 +20,9 @@ public class MenuListTest {
     @Before
     public void setUp() {
         bibliotecaLibrary = new BibliotecaLibrary();
-        bibliotecaLibrary.addBook(new Book("book1", "author1", "date1"));
-        bibliotecaLibrary.addBook(new Book("book2", "author2", "date2"));
-        bibliotecaLibrary.addBook(new Book("book3", "author3", "date3"));
+        bibliotecaLibrary.getBookLibrary().addBook(new Book("book1", "author1", "date1"));
+        bibliotecaLibrary.getBookLibrary().addBook(new Book("book2", "author2", "date2"));
+        bibliotecaLibrary.getBookLibrary().addBook(new Book("book3", "author3", "date3"));
 
     }
 

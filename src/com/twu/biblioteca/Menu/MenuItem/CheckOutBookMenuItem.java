@@ -12,7 +12,7 @@ public class CheckOutBookMenuItem implements MenuItem {
         String outStatement = "";
         ioDevice.write("Enter Book Title:\n");
         String bookTitle = ioDevice.read();
-        Book book = bibliotecaLibrary.checkout(bookTitle);
+        Book book = bibliotecaLibrary.getBookLibrary().checkout(bookTitle);
         if (book!=null){
             outStatement="Thank you! Enjoy the book\n";
         }

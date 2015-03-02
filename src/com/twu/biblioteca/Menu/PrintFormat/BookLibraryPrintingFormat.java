@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by juhijariwala on 27/02/15.
  */
-public class LibraryPrintingFormat {
+public class BookLibraryPrintingFormat {
 
 
     public String printBook(Book book) {

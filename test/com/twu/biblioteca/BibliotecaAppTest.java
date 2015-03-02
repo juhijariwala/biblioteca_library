@@ -16,9 +16,9 @@ public class BibliotecaAppTest {
     @Before
     public void setUp() {
         bibliotecaLibrary = new BibliotecaLibrary();
-        bibliotecaLibrary.addBook(new Book("book1", "author1", "date1"));
-        bibliotecaLibrary.addBook(new Book("book2", "author2", "date2"));
-        bibliotecaLibrary.addBook(new Book("book3", "author3", "date3"));
+        bibliotecaLibrary.getBookLibrary().addBook(new Book("book1", "author1", "date1"));
+        bibliotecaLibrary.getBookLibrary().addBook(new Book("book2", "author2", "date2"));
+        bibliotecaLibrary.getBookLibrary().addBook(new Book("book3", "author3", "date3"));
         menuList = new MenuList(bibliotecaLibrary, new ByteStreamIODevice("1"));
         bibliotecaApp = new BibliotecaApp(menuList);
     }
@@ -29,7 +29,6 @@ public class BibliotecaAppTest {
         String welcomeMsg = bibliotecaApp.displayWelcomeMessage();
         Assert.assertEquals("Welcome to Bibliotica App!!\n", welcomeMsg.toString());
     }
-
 
     @Test
     public void shouldDisplayMenu() {

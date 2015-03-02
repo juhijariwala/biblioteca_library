@@ -1,24 +1,25 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.Library.BibliotecaLibrary;
 import com.twu.biblioteca.Library.Book;
-import com.twu.biblioteca.Menu.PrintFormat.LibraryPrintingFormat;
+import com.twu.biblioteca.Library.BookLibrary;
+import com.twu.biblioteca.Menu.PrintFormat.BookLibraryPrintingFormat;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.ArrayList;
 
 public class BibliotecaLibraryTest {
-    private BibliotecaLibrary bibliotecaLibrary;
-    private LibraryPrintingFormat libraryPrintingFormat;
+    private BookLibrary bookLibrary;
+    private BookLibraryPrintingFormat bookLibraryPrintingFormat;
 
     @Before
     public void setUp(){
-        bibliotecaLibrary= new BibliotecaLibrary();
-        bibliotecaLibrary.addBook(new Book("book1", "author1", "date1"));
-        bibliotecaLibrary.addBook(new Book("book2", "author2", "date2"));
-        bibliotecaLibrary.addBook(new Book("book3", "author3", "date3"));
-        libraryPrintingFormat =new LibraryPrintingFormat();
+        bookLibrary= new BookLibrary();
+        bookLibrary.addBook(new Book("book1", "author1", "date1"));
+        bookLibrary.addBook(new Book("book2", "author2", "date2"));
+        bookLibrary.addBook(new Book("book3", "author3", "date3"));
+        bookLibraryPrintingFormat =new BookLibraryPrintingFormat();
     }
     @Test
     public void shouldGetListOfBooks() {
@@ -26,7 +27,7 @@ public class BibliotecaLibraryTest {
         expectedBookList.add(new Book("book1", "author1", "date1"));
         expectedBookList.add(new Book("book2", "author2", "date2"));
         expectedBookList.add(new Book("book3", "author3", "date3"));
-        Assert.assertTrue(checkEqualBookList(expectedBookList, bibliotecaLibrary.getBookList()));
+        Assert.assertTrue(checkEqualBookList(expectedBookList, bookLibrary.getBookList()));
 
     }
 
@@ -35,14 +36,14 @@ public class BibliotecaLibraryTest {
         ArrayList<Book> expectedBookList=new ArrayList<Book>();
         expectedBookList.add(new Book("book3", "author3", "date3"));
         ArrayList<Book> searchedBookList;
-        searchedBookList=bibliotecaLibrary.searchBook("book3");
+        searchedBookList=bookLibrary.searchBook("book3");
         Assert.assertTrue(checkEqualBookList(expectedBookList, searchedBookList));
     }
     @Test
     public void shouldCheckoutBook(){
         Book expectedBook= new Book("book3", "author3", "date3");
         Book checkedoutBook;
-        checkedoutBook=bibliotecaLibrary.checkout("book3");
+        checkedoutBook=bookLibrary.checkout("book3");
         Assert.assertEquals(expectedBook.getTitle(), checkedoutBook.getTitle());
     }
     @Test
@@ -51,9 +52,9 @@ public class BibliotecaLibraryTest {
         expectedBookList.add(new Book("book1", "author1", "date1"));
         expectedBookList.add(new Book("book2", "author2", "date2"));
         expectedBookList.add(new Book("book3", "author3", "date3"));
-        Book checkedoutBook = bibliotecaLibrary.checkout("book3");
+        Book checkedoutBook = bookLibrary.checkout("book3");
         ArrayList<Book> searchedBookList;
-        searchedBookList=bibliotecaLibrary.returnBook("book3");
+        searchedBookList=bookLibrary.returnBook("book3");
         Assert.assertTrue(checkEqualBookList(expectedBookList, searchedBookList));
     }
     private boolean checkEqualBookList(ArrayList<Book> expectedBookList, ArrayList<Book> actaualBookList) {
