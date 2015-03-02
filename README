@@ -1,29 +1,56 @@
-Instructions to push your code to code.google.com
-=================================================
-1. Sign into GitHub and create a new repository
-        Repository name: twu-biblioteca-yourname
-        Privacy level: Public
-        Don't check "Initialize this repository with a README"
-        Add .gitignore: None
-        Add a license: Apache License 2.0
+What is this?
+----------------
 
-2. Run 'git init' in the folder that was extracted from the downloaded .zip file, in order to
- initialize local repository.
+This is Biblioteca Library which contains list of books where user can view,checkout and return books.
+There are four main modules in this project.
 
-3. Make a local commit.
-    $ git add -A
-    $ git commit -m “Initial commit”
+1. App is UI layer which provides differnt feature for customer interaction.
+   App contains is main Class.
 
-(Dont forget to add the hidden .idea folder, as it will make opening your project in Intellij easier.)
+2. Customer contains cutomer class where customer is able to checkout and return book as well as maintain list of checkout books.
 
-4. After you are done with the local commit, you can share your code with "The World" by pushing it to your
- GitHub repository.
-    $ git remote add origin https://github.com/<YOUR-GITHUB-USERNAME>/twu-biblioteca-<YOURNAME>
-    $ git push origin master
+3. Library module contains book class and library class. Library hold list of book and provides functionality of check out nook, list books and return book.
 
-Instructions to open your code in Intellij
-==========================================
-1. Go to File -> Open (or Open Project)
-2. Select the directory containing the code
-DONE !
+4. Menu is further divided into two modules
+   
+   	i) MenuItem :Containes differnt menu options which is interface. 
+   ii) Printformat : provides interface for printing the output on the cosole.
+
+5. Test contains all tests.
+
+
+
+How to run gradle?
+------------------
+Project contains build.gradle file which is used to package the project 
+
+ >>GRADLE BUILD
+
+ Above command is used to compile and package folder.
+ build folder will be generated which contains below folders.
+
+ 1) classes - Contains classes of project as well as test.
+ 2) libs - contains JAR file of application (biblioteca_library.jar).
+ 3) reports - XML reports of tests.
+
+ 
+
+How to run Application ?
+--------------------
+After Gradle build you can run the application by following command.
+
+>> java -jar build/libs/biblioteca_library.jar
+
+Output :
+
+Welcome to Bibliotica App!!
+
+*************************Menu************************
+|	List Books : Press 1
+|	Check Out Book : Press 2
+|	Return Book : Press 3
+|	Quit : Press 0
+*****************************************************
+
+Enter your choice:
 
