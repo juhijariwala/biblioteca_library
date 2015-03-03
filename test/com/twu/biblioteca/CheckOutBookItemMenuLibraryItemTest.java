@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.Library.BibliotecaLibrary;
-import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.Library.Library;
+import com.twu.biblioteca.Library.BookItem;
 import com.twu.biblioteca.Menu.MenuItem.MenuList;
 import com.twu.biblioteca.Menu.MenuItem.CheckOutBookMenuItem;
 import org.junit.Assert;
@@ -10,15 +10,15 @@ import org.junit.Test;
 
 import java.io.*;
 
-public class CheckOutBookMenuItemTest {
-    private BibliotecaLibrary bibliotecaLibrary;
+public class CheckOutBookItemMenuLibraryItemTest {
+    private Library library;
     private MenuList menuList;
     @Before
     public void setUp(){
-        bibliotecaLibrary= new BibliotecaLibrary();
-        bibliotecaLibrary.getBookLibrary().addBook(new Book("book1", "author1", "date1"));
-        bibliotecaLibrary.getBookLibrary().addBook(new Book("book2", "author2", "date2"));
-        bibliotecaLibrary.getBookLibrary().addBook(new Book("book3", "author3", "date3"));
+        library = new Library();
+        library.getBookLibrary().addItem(new BookItem("book1", "author1", "date1"));
+        library.getBookLibrary().addItem(new BookItem("book2", "author2", "date2"));
+        library.getBookLibrary().addItem(new BookItem("book3", "author3", "date3"));
     }
 
 
@@ -26,10 +26,10 @@ public class CheckOutBookMenuItemTest {
     public void should_ask_user_for_book_title() throws IOException {
         String input = "book1\nbook1";
         ByteStreamIODevice ioDevice=new ByteStreamIODevice(input);
-        menuList =new MenuList(bibliotecaLibrary,ioDevice);
+        menuList =new MenuList(library,ioDevice);
 
         CheckOutBookMenuItem checkOutBookLibraryAction=new CheckOutBookMenuItem();
-        checkOutBookLibraryAction.performAction(bibliotecaLibrary,ioDevice);
+        checkOutBookLibraryAction.performAction(library,ioDevice);
         final StringBuffer expectedOutput = new StringBuffer();
         expectedOutput.append("Thank you! Enjoy the book\n");
         Assert.assertEquals(expectedOutput.toString(), ioDevice.out.toString());

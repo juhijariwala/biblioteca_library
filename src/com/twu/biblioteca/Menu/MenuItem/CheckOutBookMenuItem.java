@@ -1,19 +1,19 @@
 package com.twu.biblioteca.Menu.MenuItem;
 
-import com.twu.biblioteca.Library.BibliotecaLibrary;
+import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
-import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.Library.BookItem;
 
 import java.io.*;
 
 public class CheckOutBookMenuItem implements MenuItem {
     @Override
-    public void performAction(BibliotecaLibrary bibliotecaLibrary, IODevice ioDevice) throws IOException {
+    public void performAction(Library library, IODevice ioDevice) throws IOException {
         String outStatement = "";
         ioDevice.write("Enter Book Title:\n");
         String bookTitle = ioDevice.read();
-        Book book = bibliotecaLibrary.getBookLibrary().checkout(bookTitle);
-        if (book!=null){
+        BookItem bookItem = library.getBookLibrary().checkout(bookTitle);
+        if (bookItem !=null){
             outStatement="Thank you! Enjoy the book\n";
         }
         else {

@@ -1,6 +1,6 @@
 package com.twu.biblioteca.Menu.MenuItem;
 
-import com.twu.biblioteca.Library.BibliotecaLibrary;
+import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class QuitMenuItem implements MenuItem {
     @Override
-    public void performAction(BibliotecaLibrary bibliotecaLibrary, IODevice ioDevice) throws IOException {
+    public void performAction(Library library, IODevice ioDevice) throws IOException {
         ioDevice.write("Successfully Exited!!\n");
         return;
     }

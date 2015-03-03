@@ -1,28 +1,28 @@
 package com.twu.biblioteca.Customer;
 
-import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.Library.LibraryItem;
 
 import java.util.ArrayList;
 
 /**
  * Created by juhijariwala on 26/02/15.
  */
-public class Customer {
+public class Customer<T extends LibraryItem> {
 
-    private ArrayList<Book> bookList = new ArrayList<Book>();
+    private ArrayList<T> itemList = new ArrayList<T>();
 
-    public ArrayList<Book> getBookList() {
-        return bookList;
+    public ArrayList<T> getItemList() {
+        return itemList;
     }
 
-    public void addBook(Book book) {
-        bookList.add(book);
+    public void addItem(T t) {
+        itemList.add(t);
     }
 
-    public Book returnBook(String bookTitle) {
-        for (Book book : bookList) {
-            if (book.getTitle().equals(bookTitle))
-                return book;
+    public T returnItem(String title) {
+        for (T t : itemList) {
+            if (t.getTitle().equals(title))
+                return t;
         }
         return null;
     }

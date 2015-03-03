@@ -1,6 +1,6 @@
 package com.twu.biblioteca.Menu.MenuItem;
 
-import com.twu.biblioteca.Library.BibliotecaLibrary;
+import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 
 import java.io.IOException;
@@ -9,11 +9,11 @@ import java.util.HashMap;
 public class MenuList {
 
     private HashMap<Integer, MenuItem> libraryCommands = new HashMap<Integer, MenuItem>();
-    private BibliotecaLibrary bibliotecaLibrary;
+    private Library library;
     IODevice ioDevice;
 
-    public MenuList(BibliotecaLibrary bibliotecaLibrary, IODevice ioDevice) {
-        this.bibliotecaLibrary = bibliotecaLibrary;
+    public MenuList(Library library, IODevice ioDevice) {
+        this.library = library;
         this.ioDevice = ioDevice;
     }
 
@@ -24,7 +24,7 @@ public class MenuList {
     public void executeCommand(int choice) throws IOException {
 
         if (libraryCommands.get(choice) != null) {
-            libraryCommands.get(choice).performAction(bibliotecaLibrary, ioDevice);
+            libraryCommands.get(choice).performAction(library, ioDevice);
         } else {
 
             String error = "Select a valid option!\n";

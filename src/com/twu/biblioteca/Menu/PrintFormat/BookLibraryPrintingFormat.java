@@ -1,6 +1,6 @@
 package com.twu.biblioteca.Menu.PrintFormat;
 
-import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.Library.BookItem;
 
 import java.util.ArrayList;
 
@@ -10,13 +10,13 @@ import java.util.ArrayList;
 public class BookLibraryPrintingFormat {
 
 
-    public String printBook(Book book) {
+    public String printBook(BookItem bookItem) {
         String format = "%1$-20s %2$-20s %3$-20s\n";
-        return (String.format(format, book.getTitle(), book.getAuthor(), book.getPublishDate()));
+        return (String.format(format, bookItem.getTitle(), bookItem.getAuthor(), bookItem.getPublishDate()));
 
     }
 
-    public String printLibrayBooks(ArrayList<Book> bookList) {
+    public String printLibrayBooks(ArrayList<BookItem> bookItemList) {
         String listOfBookDetail;
         String format = "%1$-20s %2$-20s %3$-20s\n";
         listOfBookDetail="******************************************************\n";
@@ -24,9 +24,9 @@ public class BookLibraryPrintingFormat {
         listOfBookDetail+="*****************************************************\n";
 
 
-        for (Book book : bookList) {
+        for (BookItem bookItem : bookItemList) {
 
-            listOfBookDetail += printBook(book);
+            listOfBookDetail += printBook(bookItem);
 
         }
         return listOfBookDetail;

@@ -1,7 +1,7 @@
 package com.twu.biblioteca.Menu.MenuItem;
 
-import com.twu.biblioteca.Library.BibliotecaLibrary;
-import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.Library.Library;
+import com.twu.biblioteca.Library.BookItem;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.Menu.PrintFormat.BookLibraryPrintingFormat;
 
@@ -15,13 +15,13 @@ public class ReturnBookMenuItem implements MenuItem {
     BookLibraryPrintingFormat bookLibraryPrintingFormat = new BookLibraryPrintingFormat();
 
     @Override
-    public void performAction(BibliotecaLibrary bibliotecaLibrary, IODevice ioDevice) throws IOException {
+    public void performAction(Library library, IODevice ioDevice) throws IOException {
         String bookTitle;
         ioDevice.write("Eneter Book Title:\n");
         bookTitle = ioDevice.read();
-        ArrayList<Book> bookList = bibliotecaLibrary.getBookLibrary().returnBook(bookTitle);
-        if (bookList != null) {
-            ioDevice.write(bookLibraryPrintingFormat.printLibrayBooks(bookList));
+        ArrayList<BookItem> bookItemList = library.getBookLibrary().returnBook(bookTitle);
+        if (bookItemList != null) {
+            ioDevice.write(bookLibraryPrintingFormat.printLibrayBooks(bookItemList));
         }
         else
         ioDevice.write("That book is not available\n");

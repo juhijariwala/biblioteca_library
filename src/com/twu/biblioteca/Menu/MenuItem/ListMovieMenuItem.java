@@ -1,6 +1,6 @@
 package com.twu.biblioteca.Menu.MenuItem;
 
-import com.twu.biblioteca.Library.BibliotecaLibrary;
+import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.Menu.PrintFormat.MovieLibraryPrintingFormat;
 
@@ -13,9 +13,9 @@ public class ListMovieMenuItem  implements MenuItem{
 
     MovieLibraryPrintingFormat movieLibraryPrintingFormat=new MovieLibraryPrintingFormat();
     @Override
-    public void performAction(BibliotecaLibrary bibliotecaLibrary, IODevice ioDevice) throws IOException {
+    public void performAction(Library library, IODevice ioDevice) throws IOException {
 
-        String movieDetailPrintStatement = movieLibraryPrintingFormat.printLibrayMovies(bibliotecaLibrary.getMovieLibrary().getMovieList());
+        String movieDetailPrintStatement = movieLibraryPrintingFormat.printLibrayMovies(library.getMovieLibrary().getItemList());
         ioDevice.write(movieDetailPrintStatement);
     }
 }

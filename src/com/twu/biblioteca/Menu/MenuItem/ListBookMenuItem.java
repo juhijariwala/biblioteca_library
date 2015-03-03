@@ -1,6 +1,6 @@
 package com.twu.biblioteca.Menu.MenuItem;
 
-import com.twu.biblioteca.Library.BibliotecaLibrary;
+import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.Menu.PrintFormat.BookLibraryPrintingFormat;
 
@@ -12,8 +12,8 @@ import java.io.IOException;
 public class ListBookMenuItem implements MenuItem {
     BookLibraryPrintingFormat bookLibraryPrintingFormat =new BookLibraryPrintingFormat();
     @Override
-    public void performAction(BibliotecaLibrary bibliotecaLibrary, IODevice ioDevice) throws IOException {
-        String bookDetailPrintStatement = bookLibraryPrintingFormat.printLibrayBooks(bibliotecaLibrary.getBookLibrary().getBookList());
+    public void performAction(Library library, IODevice ioDevice) throws IOException {
+        String bookDetailPrintStatement = bookLibraryPrintingFormat.printLibrayBooks(library.getBookLibrary().getItemList());
         ioDevice.write(bookDetailPrintStatement);
     }
 }

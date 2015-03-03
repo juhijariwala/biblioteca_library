@@ -1,25 +1,25 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.App.BibliotecaApp;
-import com.twu.biblioteca.Library.BibliotecaLibrary;
-import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.Library.Library;
+import com.twu.biblioteca.Library.BookItem;
 import com.twu.biblioteca.Menu.MenuItem.MenuList;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class BibliotecaAppTest {
-    private BibliotecaLibrary bibliotecaLibrary;
+    private Library library;
     private BibliotecaApp bibliotecaApp;
     private MenuList menuList;
 
     @Before
     public void setUp() {
-        bibliotecaLibrary = new BibliotecaLibrary();
-        bibliotecaLibrary.getBookLibrary().addBook(new Book("book1", "author1", "date1"));
-        bibliotecaLibrary.getBookLibrary().addBook(new Book("book2", "author2", "date2"));
-        bibliotecaLibrary.getBookLibrary().addBook(new Book("book3", "author3", "date3"));
-        menuList = new MenuList(bibliotecaLibrary, new ByteStreamIODevice("1"));
+        library = new Library();
+        library.getBookLibrary().addItem(new BookItem("book1", "author1", "date1"));
+        library.getBookLibrary().addItem(new BookItem("book2", "author2", "date2"));
+        library.getBookLibrary().addItem(new BookItem("book3", "author3", "date3"));
+        menuList = new MenuList(library, new ByteStreamIODevice("1"));
         bibliotecaApp = new BibliotecaApp(menuList);
     }
 

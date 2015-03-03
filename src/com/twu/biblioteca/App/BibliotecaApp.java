@@ -1,7 +1,7 @@
 package com.twu.biblioteca.App;
 
-import com.twu.biblioteca.Library.BibliotecaLibrary;
-import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.Library.Library;
+import com.twu.biblioteca.Library.BookItem;
 import com.twu.biblioteca.Menu.MenuItem.*;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.SystemConsoleIODevice;
@@ -46,18 +46,18 @@ public class BibliotecaApp {
 
     public static void main(String[] args) throws IOException {
 
-        BibliotecaLibrary bibliotecaLibrary;
-        bibliotecaLibrary = new BibliotecaLibrary();
-        bibliotecaLibrary.getBookLibrary().addBook(new Book("two states", "Chetan Bhagat", "1/09/2014"));
-        bibliotecaLibrary.getBookLibrary().addBook(new Book("wings of fire", "APJ Abdul Kalam", "12/1/1999"));
-        bibliotecaLibrary.getBookLibrary().addBook(new Book("Harry Potter", "J. K. Rowling", "04/10/2001"));
+        Library library;
+        library = new Library();
+        library.getBookLibrary().addItem(new BookItem("two states", "Chetan Bhagat", "1/09/2014"));
+        library.getBookLibrary().addItem(new BookItem("wings of fire", "APJ Abdul Kalam", "12/1/1999"));
+        library.getBookLibrary().addItem(new BookItem("Harry Potter", "J. K. Rowling", "04/10/2001"));
 
-        MenuList menuList = new MenuList(bibliotecaLibrary, new SystemConsoleIODevice());
+        MenuList menuList = new MenuList(library, new SystemConsoleIODevice());
         menuList.addCommand(1, new ListBookMenuItem());
         menuList.addCommand(0, new QuitMenuItem());
         menuList.addCommand(3, new ReturnBookMenuItem());
 
-        MenuList checkoutSubmenuList = new MenuList(bibliotecaLibrary, new SystemConsoleIODevice());
+        MenuList checkoutSubmenuList = new MenuList(library, new SystemConsoleIODevice());
         menuList.addCommand(2, new CheckOutMenuList(checkoutSubmenuList));
 
         checkoutSubmenuList.addCommand(1, new SearchBookMenuItem());

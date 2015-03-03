@@ -1,6 +1,6 @@
 package com.twu.biblioteca.Menu.PrintFormat;
 
-import com.twu.biblioteca.Library.Movie;
+import com.twu.biblioteca.Library.MovieItem;
 
 import java.util.ArrayList;
 
@@ -9,13 +9,13 @@ import java.util.ArrayList;
  */
 public class MovieLibraryPrintingFormat {
 
-    public String printMovie(Movie movie) {
+    public String printMovie(MovieItem movieItem) {
         String format = "%1$-20s %2$-20s %3$-20s %4$-20s\n";
-        return (String.format(format, movie.getName(), movie.getYear(), movie.getDirector(),movie.getRating()));
+        return (String.format(format, movieItem.getName(), movieItem.getYear(), movieItem.getDirector(), movieItem.getRating()));
 
     }
 
-    public String printLibrayMovies(ArrayList<Movie> movieList) {
+    public String printLibrayMovies(ArrayList<MovieItem> movieItemList) {
         String listOfMovieDetail;
         String format = "%1$-20s %2$-20s %3$-20s %4$-20s\n";
         listOfMovieDetail="**********************************************************\n";
@@ -23,9 +23,9 @@ public class MovieLibraryPrintingFormat {
         listOfMovieDetail+="*********************************************************\n";
 
 
-        for (Movie movie : movieList) {
+        for (MovieItem movieItem : movieItemList) {
 
-            listOfMovieDetail += printMovie(movie);
+            listOfMovieDetail += printMovie(movieItem);
 
         }
         return listOfMovieDetail;

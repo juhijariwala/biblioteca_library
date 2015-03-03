@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.Library.BibliotecaLibrary;
-import com.twu.biblioteca.Library.Book;
+import com.twu.biblioteca.Library.Library;
+import com.twu.biblioteca.Library.BookItem;
 import com.twu.biblioteca.Menu.MenuItem.ListBookMenuItem;
 import com.twu.biblioteca.Menu.MenuItem.MenuList;
 import com.twu.biblioteca.Menu.MenuItem.QuitMenuItem;
@@ -12,20 +12,20 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-public class SearchBookMenuItemTest {
-    private BibliotecaLibrary bibliotecaLibrary;
+public class SearchBookItemMenuLibraryItemTest {
+    private Library library;
     private MenuList menuList;
     private ByteStreamIODevice ioDevice;
     String format = "%1$-20s %2$-20s %3$-20s\n";
     @Before
     public void setUp(){
-        bibliotecaLibrary= new BibliotecaLibrary();
-        bibliotecaLibrary.getBookLibrary().addBook(new Book("book1", "author1", "date1"));
-        bibliotecaLibrary.getBookLibrary().addBook(new Book("book2", "author2", "date2"));
-        bibliotecaLibrary.getBookLibrary().addBook(new Book("book3", "author3", "date3"));
+        library = new Library();
+        library.getBookLibrary().addItem(new BookItem("book1", "author1", "date1"));
+        library.getBookLibrary().addItem(new BookItem("book2", "author2", "date2"));
+        library.getBookLibrary().addItem(new BookItem("book3", "author3", "date3"));
         String input = "book1";
         ioDevice=new ByteStreamIODevice(input);
-        menuList =new MenuList(bibliotecaLibrary,ioDevice);
+        menuList =new MenuList(library,ioDevice);
         menuList.addCommand(1, new ListBookMenuItem());
         menuList.addCommand(0, new QuitMenuItem());
         menuList.addCommand(2, new SearchBookMenuItem());
@@ -35,7 +35,7 @@ public class SearchBookMenuItemTest {
         String input="book1";
         ByteStreamIODevice ioDevice=new ByteStreamIODevice(input);
         SearchBookMenuItem searchBookLibraryAction=new SearchBookMenuItem();
-        searchBookLibraryAction.performAction(bibliotecaLibrary,ioDevice);
+        searchBookLibraryAction.performAction(library,ioDevice);
         final StringBuffer expectedOutput = new StringBuffer();
         expectedOutput.append("******************************************************\n");
         expectedOutput.append(String.format(format, "Title", "Author", "PublishedOn"));
