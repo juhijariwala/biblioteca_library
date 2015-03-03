@@ -3,24 +3,37 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.App.BibliotecaApp;
 import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Library.BookItem;
-import com.twu.biblioteca.Menu.MenuItem.MenuList;
+import com.twu.biblioteca.Menu.MenuItem.MainMenuItem;
+import com.twu.biblioteca.Menu.MenuItem.Menu;
+import com.twu.biblioteca.Menu.MenuItem.MenuManager;
+import com.twu.biblioteca.Menu.PrintFormat.BookLibraryPrintingFormat;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class BibliotecaAppTest {
     private Library library;
     private BibliotecaApp bibliotecaApp;
-    private MenuList menuList;
+    private Menu menu;
+    BookLibraryPrintingFormat bookLibraryPrintingFormat;
 
     @Before
     public void setUp() {
+        bookLibraryPrintingFormat=new BookLibraryPrintingFormat();
         library = new Library();
-        library.getBookLibrary().addItem(new BookItem("book1", "author1", "date1"));
-        library.getBookLibrary().addItem(new BookItem("book2", "author2", "date2"));
-        library.getBookLibrary().addItem(new BookItem("book3", "author3", "date3"));
-        menuList = new MenuList(library, new ByteStreamIODevice("1"));
-        bibliotecaApp = new BibliotecaApp(menuList);
+        ArrayList<BookItem> bookList=new ArrayList<BookItem>();
+        bookList.add(new BookItem("book1", "author1", "date1"));
+        bookList.add(new BookItem("book2", "author2", "date2"));
+        bookList.add(new BookItem("book3", "author3", "date3"));
+        library.getBookLibrary().add(bookList);
+        menu = new Menu(library.getBookLibrary(),bookLibraryPrintingFormat, new ByteStreamIODevice("1"));
+        MenuManager menuManager=new MenuManager();
+        Menu bookMainMenu=new Menu(library.getBookLibrary(),bookLibraryPrintingFormat,new ByteStreamIODevice("1"));
+        bookMainMenu.addCommand(0,new MainMenuItem(menu));
+        menuManager.addMainMenuList(1,bookMainMenu);
+        bibliotecaApp = new BibliotecaApp(menuManager);
     }
 
     @Test
@@ -32,9 +45,9 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldDisplayMenu() {
-        final String menu ="*************************Menu************************\n|\tList Books : Press 1\t\n" +
-                "|\tCheck Out Book : Press 2\t\n" +
-                "|\tReturn Book : Press 3\t\n|\tQuit : Press 0\t\n*****************************************************\n" +
+        final String menu ="*************************Menu************************\n|\tBook Menu : Press 1\t\n" +
+                "|\tMovie Menu : Press 2\t\n" +
+                "|\tQuit : Press 0\t\n*****************************************************\n" +
                 "\nEnter your choice:";
         Assert.assertEquals(menu, bibliotecaApp.displayMenu());
     }

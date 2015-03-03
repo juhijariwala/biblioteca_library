@@ -11,8 +11,10 @@ public class MovieItemLibraryTest {
         Library library =new Library();
         MovieItem movieItem1 =new MovieItem("movie1", 2000, "director1", "10");
         MovieItem movieItem2 =new MovieItem("movie2", 2000, "director1", "10");
-        library.getMovieLibrary().addItem(movieItem1);
-        library.getMovieLibrary().addItem(movieItem2);
+        ArrayList<MovieItem> movieList=new ArrayList<MovieItem>();
+        movieList.add(movieItem1);
+        movieList.add(movieItem2);
+        library.getMovieLibrary().add(movieList);
         ArrayList<MovieItem> actualMovieItemList = library.getMovieLibrary().getItemList();
         ArrayList<MovieItem> expectedMovieItemList = new ArrayList<MovieItem>();
         expectedMovieItemList.add(new MovieItem("movie1",2000, "director1", "10"));
@@ -25,20 +27,18 @@ public class MovieItemLibraryTest {
         Library library =new Library();
         MovieItem movieItem1 =new MovieItem("movie1", 2000, "director1", "10");
         MovieItem movieItem2 =new MovieItem("movie2", 2000, "director1", "10");
-        library.getMovieLibrary().addItem(movieItem1);
-        library.getMovieLibrary().addItem(movieItem2);
+        ArrayList<MovieItem> movieList=new ArrayList<MovieItem>();
+        movieList.add(movieItem1);
+        movieList.add(movieItem2);
+        library.getMovieLibrary().add(movieList);
         MovieItem actualMovieItem = library.getMovieLibrary().checkout("movie2");
-//        Assert.assertEquals(true, checkEqualbookList(expectedMovieItemList, actualMovieItemList));
+        Assert.assertEquals(true,checkEqualMovie(movieItem2 ,actualMovieItem));
 
     }
     private boolean checkEqualbookList(ArrayList<MovieItem> expectedMovieItemList, ArrayList<MovieItem> actualMovieItemList){
         if(expectedMovieItemList.size()== actualMovieItemList.size()){
             for(int i=0;i< expectedMovieItemList.size();i++){
-                if (!actualMovieItemList.get(i).getYear().equals(expectedMovieItemList.get(i).getYear())) {
-                    return false;
-                } else if (!actualMovieItemList.get(i).getDirector().equals(expectedMovieItemList.get(i).getDirector())) {
-                    return false;
-                } else if (!actualMovieItemList.get(i).getName().equals(expectedMovieItemList.get(i).getName())) {
+                if(!checkEqualMovie(expectedMovieItemList.get(i),actualMovieItemList.get(i))){
                     return false;
                 }
             }
@@ -47,5 +47,16 @@ public class MovieItemLibraryTest {
             return false;
         }
                 return true;
+    }
+
+    private boolean checkEqualMovie(MovieItem expectedMovieItem, MovieItem actualMovieItem){
+        if (!actualMovieItem.getYear().equals(expectedMovieItem.getYear())) {
+            return false;
+        } else if (!actualMovieItem.getDirector().equals(expectedMovieItem.getDirector())) {
+            return false;
+        } else if (!actualMovieItem.getTitle().equals(expectedMovieItem.getTitle())) {
+            return false;
+        }
+        return true;
     }
 }

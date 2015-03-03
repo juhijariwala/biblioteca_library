@@ -1,19 +1,22 @@
 package com.twu.biblioteca.App;
 
-import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Library.BookItem;
-import com.twu.biblioteca.Menu.MenuItem.*;
+import com.twu.biblioteca.Library.Library;
+import com.twu.biblioteca.Library.MovieItem;
+import com.twu.biblioteca.Menu.MenuItem.MenuFactory;
+import com.twu.biblioteca.Menu.MenuItem.MenuManager;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.SystemConsoleIODevice;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class BibliotecaApp {
 
-    private MenuList menuList;
+    private MenuManager menuManager;
 
-    public BibliotecaApp(MenuList menuList) {
-        this.menuList = menuList;
+    public BibliotecaApp(MenuManager menuManager) {
+        this.menuManager = menuManager;
     }
 
     public String displayWelcomeMessage() {
@@ -21,9 +24,9 @@ public class BibliotecaApp {
     }
 
     public String displayMenu() {
-        return "*************************Menu************************\n|\tList Books : Press 1\t\n" +
-                "|\tCheck Out Book : Press 2\t\n" +
-                "|\tReturn Book : Press 3\t\n|\tQuit : Press 0\t\n*****************************************************\n" +
+        return "*************************Menu************************\n|\tBook Menu : Press 1\t\n" +
+                "|\tMovie Menu : Press 2\t\n" +
+                "|\tQuit : Press 0\t\n*****************************************************\n" +
                 "\nEnter your choice:";
     }
 
@@ -35,7 +38,7 @@ public class BibliotecaApp {
             ioDevice.write(displayMenu());
             try {
                 choice = Integer.parseInt(ioDevice.read());
-                menuList.executeCommand(choice);
+                menuManager.navigate(choice);
             } catch (NumberFormatException e) {
                 ioDevice.write("Invalid Option!\n");
             }
@@ -48,23 +51,25 @@ public class BibliotecaApp {
 
         Library library;
         library = new Library();
-        library.getBookLibrary().addItem(new BookItem("two states", "Chetan Bhagat", "1/09/2014"));
-        library.getBookLibrary().addItem(new BookItem("wings of fire", "APJ Abdul Kalam", "12/1/1999"));
-        library.getBookLibrary().addItem(new BookItem("Harry Potter", "J. K. Rowling", "04/10/2001"));
 
-        MenuList menuList = new MenuList(library, new SystemConsoleIODevice());
-        menuList.addCommand(1, new ListBookMenuItem());
-        menuList.addCommand(0, new QuitMenuItem());
-        menuList.addCommand(3, new ReturnBookMenuItem());
+        ArrayList<BookItem> bookList=new ArrayList<BookItem>();
+        bookList.add(new BookItem("two states", "Chetan Bhagat", "1/09/2014"));
+        bookList.add(new BookItem("wings of fire", "APJ Abdul Kalam", "12/1/1999"));
+        bookList.add(new BookItem("Harry Potter", "J. K. Rowling", "04/10/2001"));
+        library.getBookLibrary().add(bookList);
 
-        MenuList checkoutSubmenuList = new MenuList(library, new SystemConsoleIODevice());
-        menuList.addCommand(2, new CheckOutMenuList(checkoutSubmenuList));
+        ArrayList<MovieItem> movieList=new ArrayList<MovieItem>();
+        movieList.add(new MovieItem("gangs of Wasseypur", 2012, "anurag kashyap", "8"));
+        movieList.add(new MovieItem("fandry", 2014, "nagraj manjule", "9"));
+        movieList.add(new MovieItem("gangs of Wasseypur2", 2014, "anurag kashyap", "9"));
+        library.getMovieLibrary().add(movieList);
 
-        checkoutSubmenuList.addCommand(1, new SearchBookMenuItem());
-        checkoutSubmenuList.addCommand(2, new CheckOutBookMenuItem());
-        checkoutSubmenuList.addCommand(0, new QuitMenuItem());
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(menuList);
-        bibliotecaApp.takeUserInput(new SystemConsoleIODevice());
+
+        SystemConsoleIODevice ioDevice = new SystemConsoleIODevice();
+        MenuFactory menuFactory = new MenuFactory();
+
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(menuFactory.createLibraryMenu(library,ioDevice));
+        bibliotecaApp.takeUserInput(ioDevice);
     }
 
 }

@@ -7,13 +7,13 @@ import java.util.ArrayList;
 /**
  * Created by juhijariwala on 02/03/15.
  */
-public class LibraryItemList<T extends LibraryItem>  {
+public class LibraryManager<T extends LibraryItem>  {
     private ArrayList<T> itemList = new ArrayList<T>();
 
     private Customer customer = new Customer();
 
-    public void addItem(T t) {
-        itemList.add(t);
+    public void add(ArrayList<T> t) {
+        itemList=t;
     }
 
     public ArrayList<T> getItemList() {
@@ -41,7 +41,7 @@ public class LibraryItemList<T extends LibraryItem>  {
         return null;
     }
 
-    public ArrayList<T> returnBook(String title) {
+    public ArrayList<T> returnItem(String title) {
         T t = (T) customer.returnItem(title);
         if (t != null) {
             itemList.add(t);

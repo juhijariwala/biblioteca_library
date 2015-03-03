@@ -14,7 +14,7 @@ public class MovieItemTest {
 
 
     private boolean equalMovie(MovieItem expected,MovieItem actual){
-        if (expected.getName()== actual.getName()&& expected.getDirector() == actual.getDirector()) {
+        if (expected.getTitle()== actual.getTitle()&& expected.getDirector() == actual.getDirector()) {
             return true;
         }
         else {

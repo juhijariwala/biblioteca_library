@@ -18,12 +18,6 @@ public class MovieItem implements LibraryItem{
         return this;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-
     public String getDirector() {
         return director;
     }

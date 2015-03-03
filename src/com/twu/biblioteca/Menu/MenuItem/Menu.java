@@ -1,20 +1,24 @@
 package com.twu.biblioteca.Menu.MenuItem;
 
-import com.twu.biblioteca.Library.Library;
+import com.twu.biblioteca.Library.LibraryItem;
+import com.twu.biblioteca.Library.LibraryManager;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
+import com.twu.biblioteca.Menu.PrintFormat.PrintingFormat;
 
 import java.io.IOException;
 import java.util.HashMap;
 
-public class MenuList {
+public class Menu<T extends LibraryItem> {
 
     private HashMap<Integer, MenuItem> libraryCommands = new HashMap<Integer, MenuItem>();
-    private Library library;
+    private LibraryManager<T> library;
     IODevice ioDevice;
+    PrintingFormat printingFormat;
 
-    public MenuList(Library library, IODevice ioDevice) {
+    public Menu(LibraryManager<T> library, PrintingFormat printingFormat, IODevice ioDevice) {
         this.library = library;
         this.ioDevice = ioDevice;
+        this.printingFormat=printingFormat;
     }
 
     public void addCommand(Integer choice, MenuItem menuItem) {
@@ -24,7 +28,7 @@ public class MenuList {
     public void executeCommand(int choice) throws IOException {
 
         if (libraryCommands.get(choice) != null) {
-            libraryCommands.get(choice).performAction(library, ioDevice);
+            libraryCommands.get(choice).performAction(library,printingFormat, ioDevice);
         } else {
 
             String error = "Select a valid option!\n";

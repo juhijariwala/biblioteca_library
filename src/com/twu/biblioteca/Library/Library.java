@@ -2,15 +2,15 @@ package com.twu.biblioteca.Library;
 
 public class Library {
 
-    private LibraryItemList<BookItem> bookLibrary=new LibraryItemList<BookItem>();
-     private LibraryItemList<MovieItem> movieLibrary=new LibraryItemList<MovieItem>();
+    private LibraryManager<BookItem> bookLibrary=new LibraryManager<BookItem>();
+     private LibraryManager<MovieItem> movieLibrary=new LibraryManager<MovieItem>();
 
 
-    public LibraryItemList<BookItem> getBookLibrary() {
+    public LibraryManager<BookItem> getBookLibrary() {
         return bookLibrary;
     }
 
-    public LibraryItemList<MovieItem> getMovieLibrary() {
+    public LibraryManager<MovieItem> getMovieLibrary() {
         return movieLibrary;
     }
 }
