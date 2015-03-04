@@ -7,10 +7,15 @@ import java.io.InputStreamReader;
 /**
  * Created by juhijariwala on 26/02/15.
  */
-public class SystemConsoleIODevice implements IODevice {
+public class ConsoleIODevice implements IODevice {
+    @Override
+    public void writeln(String message) {
+        System.out.println(message);
+    }
+
     @Override
     public void write(String message) {
-        System.out.println(message);
+        System.out.print(message);
     }
 
     @Override
@@ -18,5 +23,10 @@ public class SystemConsoleIODevice implements IODevice {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         return bufferedReader.readLine();
+    }
+
+    @Override
+    public String readSecurely() {
+        return null;
     }
 }

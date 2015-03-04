@@ -20,12 +20,12 @@ public class MainMenuItem implements MenuItem<LibraryManager>{
     public void performAction(LibraryManager library,PrintingFormat printingFormat, IODevice ioDevice) throws IOException {
         Integer choice=-1;
         do{
-            ioDevice.write(printingFormat.mainMenuStatement());
+            ioDevice.writeln(printingFormat.mainMenuStatement());
             try {
                 choice = Integer.parseInt(ioDevice.read());
                 menu.executeCommand(choice);
             }catch (NumberFormatException e){
-                ioDevice.write("Invalid Option!\n");
+                ioDevice.writeln("Invalid Option!\n");
             }
         }while (choice!=0);
 

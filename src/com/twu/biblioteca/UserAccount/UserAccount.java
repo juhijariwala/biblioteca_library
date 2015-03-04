@@ -18,7 +18,7 @@ public class UserAccount {
     public LibraryMember login(String libraryID, String password) {
 
         for(LibraryMember libraryMember : libraryMemberList){
-            if(libraryMember.getLibraryID()==libraryID && libraryMember.getPassword()==password){
+            if(libraryMember.getLibraryID().equals(libraryID) && libraryMember.getPassword().equals(password)){
                 return libraryMember;
             }
         }

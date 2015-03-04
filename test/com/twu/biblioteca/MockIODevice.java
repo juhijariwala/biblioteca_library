@@ -1,18 +1,19 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.*;
 
 /**
  * Created by juhijariwala on 26/02/15.
  */
-public class ByteStreamIODevice implements IODevice {
+public class MockIODevice implements IODevice {
     public InputStream in ;
     public OutputStream out;
     private BufferedReader br;
 
-    public ByteStreamIODevice(String message) {
+    public MockIODevice(String message) {
 
         in = new ByteArrayInputStream(message.getBytes());
         br=new BufferedReader(new InputStreamReader(in));
@@ -21,7 +22,7 @@ public class ByteStreamIODevice implements IODevice {
     }
 
     @Override
-    public void write(String message) throws IOException {
+    public void writeln(String message) throws IOException {
 
         out= new ByteArrayOutputStream();
         out.write(message.getBytes());
@@ -30,8 +31,18 @@ public class ByteStreamIODevice implements IODevice {
     }
 
     @Override
+    public void write(String message) {
+        throw new NotImplementedException();
+    }
+
+    @Override
     public String read() throws IOException {
 
         return br.readLine();
+    }
+
+    @Override
+    public String readSecurely() {
+        return null;
     }
 }

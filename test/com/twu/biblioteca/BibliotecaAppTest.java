@@ -28,9 +28,9 @@ public class BibliotecaAppTest {
         bookList.add(new BookItem("book2", "author2", "date2"));
         bookList.add(new BookItem("book3", "author3", "date3"));
         library.getBookLibrary().add(bookList);
-        menu = new Menu(library.getBookLibrary(),bookLibraryPrintingFormat, new ByteStreamIODevice("1"));
+        menu = new Menu(library.getBookLibrary(),bookLibraryPrintingFormat, new MockIODevice("1"));
         MenuManager menuManager=new MenuManager();
-        Menu bookMainMenu=new Menu(library.getBookLibrary(),bookLibraryPrintingFormat,new ByteStreamIODevice("1"));
+        Menu bookMainMenu=new Menu(library.getBookLibrary(),bookLibraryPrintingFormat,new MockIODevice("1"));
         bookMainMenu.addCommand(0,new MainMenuItem(menu));
         menuManager.addMainMenuList(1,bookMainMenu);
         bibliotecaApp = new BibliotecaApp(menuManager);

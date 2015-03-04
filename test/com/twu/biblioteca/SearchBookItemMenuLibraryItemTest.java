@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class SearchBookItemMenuLibraryItemTest {
     private Library library;
     private Menu menu;
-    private ByteStreamIODevice ioDevice;
+    private MockIODevice ioDevice;
     private BookLibraryPrintingFormat bookLibraryPrintingFormat=new BookLibraryPrintingFormat();
     String format = "%1$-20s %2$-20s %3$-20s\n";
     @Before
@@ -29,7 +29,7 @@ public class SearchBookItemMenuLibraryItemTest {
         bookList.add(new BookItem("book3", "author3", "date3"));
         library.getBookLibrary().add(bookList);
         String input = "book1";
-        ioDevice=new ByteStreamIODevice(input);
+        ioDevice=new MockIODevice(input);
         menu =new Menu(library.getBookLibrary(),bookLibraryPrintingFormat,ioDevice);
         menu.addCommand(1, new ListMenuItem());
         menu.addCommand(0, new QuitMenuItem());
@@ -38,7 +38,7 @@ public class SearchBookItemMenuLibraryItemTest {
     @Test
     public void should_search_book_PerformAction() throws IOException {
         String input="book1";
-        ByteStreamIODevice ioDevice=new ByteStreamIODevice(input);
+        MockIODevice ioDevice=new MockIODevice(input);
         SearchItemMenuItem searchBookLibraryAction=new SearchItemMenuItem();
         searchBookLibraryAction.performAction(library.getBookLibrary(),bookLibraryPrintingFormat,ioDevice);
         final StringBuffer expectedOutput = new StringBuffer();

@@ -1,6 +1,6 @@
 package com.twu.biblioteca.Menu.MenuItem;
 
-import com.twu.biblioteca.ByteStreamIODevice;
+import com.twu.biblioteca.MockIODevice;
 import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Library.MovieItem;
 import com.twu.biblioteca.Menu.PrintFormat.MovieLibraryPrintingFormat;
@@ -16,7 +16,7 @@ public class ListMovieItemMenuLibraryItemTest {
     public void should_print_list_of_movies() throws IOException {
         MovieLibraryPrintingFormat movieLibraryPrintingFormat=new MovieLibraryPrintingFormat();
         Library library =new Library();
-        ByteStreamIODevice IOdevice=new ByteStreamIODevice("");
+        MockIODevice IOdevice=new MockIODevice("");
         MovieItem movieItem1 =new MovieItem("movie1", 2000, "director1", "10");
         MovieItem movieItem2 =new MovieItem("movie2", 2005, "director2", "9");
         ArrayList<MovieItem> movieList=new ArrayList<MovieItem>();

@@ -13,7 +13,7 @@ public class ListMenuItem implements MenuItem<LibraryManager> {
     @Override
     public void performAction(LibraryManager library,PrintingFormat printingFormat, IODevice ioDevice) throws IOException {
         String bookDetailPrintStatement = printingFormat.printLibrayItems(library.getItemList());
-        ioDevice.write(bookDetailPrintStatement);
+        ioDevice.writeln(bookDetailPrintStatement);
     }
 
 }

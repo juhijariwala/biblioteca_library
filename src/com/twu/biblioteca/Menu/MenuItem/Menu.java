@@ -32,7 +32,7 @@ public class Menu<T extends LibraryItem> {
         } else {
 
             String error = "Select a valid option!\n";
-            ioDevice.write(error);
+            ioDevice.writeln(error);
 
         }
     }

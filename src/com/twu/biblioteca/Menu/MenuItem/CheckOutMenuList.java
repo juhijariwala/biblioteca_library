@@ -21,12 +21,12 @@ public class CheckOutMenuList implements MenuItem<LibraryManager>{
         Integer choice=-1;
         do{
 
-            ioDevice.write(printingFormat.checkOutMenuStatements());
+            ioDevice.writeln(printingFormat.checkOutMenuStatements());
             try {
                 choice = Integer.parseInt(ioDevice.read());
                 menu.executeCommand(choice);
             }catch (NumberFormatException e){
-                ioDevice.write("Invalid Option!\n");
+                ioDevice.writeln("Invalid Option!\n");
             }
         }while (choice!=0);
     }

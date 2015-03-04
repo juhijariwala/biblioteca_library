@@ -15,7 +15,6 @@ public class LibraryManager<T extends LibraryItem> {
 
     private HashMap<LibraryMember, ArrayList<LibraryItem>> checkedOutItems = new HashMap<LibraryMember, ArrayList<LibraryItem>>();
 
-    private LibraryMember loggedinMember;
 
     public HashMap<LibraryMember, ArrayList<LibraryItem>> getCheckedOutItems() {
         return checkedOutItems;
@@ -72,13 +71,6 @@ public class LibraryManager<T extends LibraryItem> {
         return null;
     }
 
-    public LibraryMember getLoggedinMember() {
-        return loggedinMember;
-    }
-
-    public void setLoggedinMember(LibraryMember loggedinMember) {
-        this.loggedinMember = loggedinMember;
-    }
 }
 
 

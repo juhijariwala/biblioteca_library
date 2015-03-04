@@ -5,6 +5,7 @@ import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Library.BookItem;
 import com.twu.biblioteca.Menu.MenuItem.*;
 import com.twu.biblioteca.Menu.PrintFormat.BookLibraryPrintingFormat;
+import com.twu.biblioteca.UserAccount.LibraryMember;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +18,8 @@ public class MenuTest {
     private BibliotecaApp bibliotecaApp;
     private Menu menu;
     private BookLibraryPrintingFormat bookLibraryPrintingFormat;
+    LibraryMember libraryMember=  new LibraryMember("123-4567","Juhi","juhi.jari@gmail.com","12345678","password1");
+    MockUserSessionHolder mockUserSessionHolder=new MockUserSessionHolder();
     String format = "%1$-20s %2$-20s %3$-20s\n";
 
 
@@ -29,13 +32,14 @@ public class MenuTest {
         bookList.add(new BookItem("book3", "author3", "date3"));
         library.getBookLibrary().add(bookList);
         bookLibraryPrintingFormat=new BookLibraryPrintingFormat();
+        mockUserSessionHolder.setUser(libraryMember);
 
     }
 
     @Test
     public void should_excute_command_given_input_ONE() throws IOException {
         String input = "1";
-        ByteStreamIODevice ioDevice = new ByteStreamIODevice(input);
+        MockIODevice ioDevice = new MockIODevice(input);
         menu = new Menu(library.getBookLibrary(),bookLibraryPrintingFormat, ioDevice);
         menu.addCommand(1, new ListMenuItem());
         menu.executeCommand(1);
@@ -53,7 +57,7 @@ public class MenuTest {
     @Test
     public void should_quit_on_execute_command_given_input_ZERO() throws IOException {
         String input = "0";
-        ByteStreamIODevice ioDevice = new ByteStreamIODevice(input);
+        MockIODevice ioDevice = new MockIODevice(input);
         menu = new Menu(library.getBookLibrary(), bookLibraryPrintingFormat,ioDevice);
         menu.addCommand(0, new QuitMenuItem());
         menu.executeCommand(0);
@@ -65,10 +69,10 @@ public class MenuTest {
     @Test
     public void should_excute_command_checkout_given_input_TWO() throws IOException {
         String input = "book1\nbook1";
-        ByteStreamIODevice ioDevice = new ByteStreamIODevice(input);
+        MockIODevice ioDevice = new MockIODevice(input);
         menu = new Menu(library.getBookLibrary(),bookLibraryPrintingFormat, ioDevice);
         menu.addCommand(1, new ListMenuItem());
-        menu.addCommand(2, new CheckOutMenuItem());
+        menu.addCommand(2, new CheckOutMenuItem(mockUserSessionHolder));
         menu.addCommand(0, new QuitMenuItem());
         menu.executeCommand(2);
         final StringBuffer expectedOutput = new StringBuffer();
@@ -79,10 +83,10 @@ public class MenuTest {
     @Test
     public void should_notify_if_book_is_not_available() throws IOException {
         String input = "book12\nbook14";
-        ByteStreamIODevice ioDevice = new ByteStreamIODevice(input);
+        MockIODevice ioDevice = new MockIODevice(input);
         menu = new Menu(library.getBookLibrary(), bookLibraryPrintingFormat,ioDevice);
         menu.addCommand(1, new ListMenuItem());
-        menu.addCommand(2, new CheckOutMenuItem());
+        menu.addCommand(2, new CheckOutMenuItem(mockUserSessionHolder));
         menu.addCommand(0, new QuitMenuItem());
         menu.executeCommand(2);
         final StringBuffer expectedOutput = new StringBuffer();
@@ -93,15 +97,13 @@ public class MenuTest {
     @Test
     public void should_return_book_given_input_Three() throws IOException {
         String input = "book1\nbook1\nbook1";
-        ByteStreamIODevice ioDevice = new ByteStreamIODevice(input);
+        MockIODevice ioDevice = new MockIODevice(input);
         menu = new Menu(library.getBookLibrary(),bookLibraryPrintingFormat, ioDevice);
-        menu.addCommand(1, new ListMenuItem());
-        menu.addCommand(2, new CheckOutMenuItem());
         menu.addCommand(0, new QuitMenuItem());
-        menu.addCommand(3, new ReturnItemMenuItem());
-        menu.executeCommand(2);
-        menu.executeCommand(3);
+        menu.addCommand(3, new ReturnItemMenuItem(mockUserSessionHolder));
+        BookItem checkedoutBookItem = library.getBookLibrary().checkout("book1",mockUserSessionHolder.getUser());
         final StringBuffer expectedOutput = new StringBuffer();
+        menu.executeCommand(3);
         expectedOutput.append("******************************************************\n");
         expectedOutput.append(String.format(format, "Title", "Author", "PublishedOn"));
         expectedOutput.append("*****************************************************\n");
@@ -114,12 +116,12 @@ public class MenuTest {
     @Test
     public void should_give_error_message_on_invalid_bookreturn() throws IOException {
         String input = "5\nbook1\nbook4";
-        ByteStreamIODevice ioDevice = new ByteStreamIODevice(input);
+        MockIODevice ioDevice = new MockIODevice(input);
         menu = new Menu(library.getBookLibrary(),bookLibraryPrintingFormat, ioDevice);
         menu.addCommand(1, new ListMenuItem());
-        menu.addCommand(2, new CheckOutMenuItem());
+        menu.addCommand(2, new CheckOutMenuItem(mockUserSessionHolder));
         menu.addCommand(0, new QuitMenuItem());
-        menu.addCommand(3, new ReturnItemMenuItem());
+        menu.addCommand(3, new ReturnItemMenuItem(mockUserSessionHolder));
         menu.executeCommand(2);
         menu.executeCommand(3);
         final StringBuffer expectedOutput = new StringBuffer();
@@ -130,14 +132,14 @@ public class MenuTest {
     @Test
     public void should_show_checkout_menu() throws IOException {
         String input = "4\nbook1\n5\nbook1\n0\n0";
-        ByteStreamIODevice ioDevice = new ByteStreamIODevice(input);
+        MockIODevice ioDevice = new MockIODevice(input);
         menu = new Menu(library.getBookLibrary(),bookLibraryPrintingFormat, ioDevice);
         menu.addCommand(1, new ListMenuItem());
         menu.addCommand(0, new QuitMenuItem());
         menu.addCommand(2, new CheckOutMenuList(menu));
-        menu.addCommand(3, new ReturnItemMenuItem());
+        menu.addCommand(3, new ReturnItemMenuItem(mockUserSessionHolder));
         menu.addCommand(4, new SearchItemMenuItem());
-        menu.addCommand(5, new CheckOutMenuItem());
+        menu.addCommand(5, new CheckOutMenuItem(mockUserSessionHolder));
 
         menu.executeCommand(2);
         final StringBuffer expectedOutput = new StringBuffer();

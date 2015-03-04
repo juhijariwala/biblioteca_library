@@ -12,7 +12,7 @@ import java.io.IOException;
 public class QuitMenuItem implements MenuItem<LibraryManager> {
     @Override
     public void performAction(LibraryManager library,PrintingFormat printingFormat, IODevice ioDevice) throws IOException {
-        ioDevice.write("Successfully Exited!!\n");
+        ioDevice.writeln("Successfully Exited!!\n");
         return;
     }
 }

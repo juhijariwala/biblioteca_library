@@ -6,7 +6,8 @@ import com.twu.biblioteca.Library.MovieItem;
 import com.twu.biblioteca.Menu.MenuItem.MenuFactory;
 import com.twu.biblioteca.Menu.MenuItem.MenuManager;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
-import com.twu.biblioteca.Menu.PrintFormat.IODevice.SystemConsoleIODevice;
+import com.twu.biblioteca.Menu.PrintFormat.IODevice.ConsoleIODevice;
+import com.twu.biblioteca.UserAccount.LibraryMember;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,14 +34,14 @@ public class BibliotecaApp {
     public void takeUserInput(IODevice ioDevice) throws IOException {
 
         Integer choice = -1;
-        ioDevice.write(displayWelcomeMessage());
+        ioDevice.writeln(displayWelcomeMessage());
         do {
-            ioDevice.write(displayMenu());
+            ioDevice.writeln(displayMenu());
             try {
                 choice = Integer.parseInt(ioDevice.read());
                 menuManager.navigate(choice);
             } catch (NumberFormatException e) {
-                ioDevice.write("Invalid Option!\n");
+                ioDevice.writeln("Invalid Option!\n");
             }
 
         } while (choice != 0);
@@ -65,11 +66,33 @@ public class BibliotecaApp {
         library.getMovieLibrary().add(movieList);
 
 
-        SystemConsoleIODevice ioDevice = new SystemConsoleIODevice();
-        MenuFactory menuFactory = new MenuFactory();
+        ConsoleIODevice ioDevice = new ConsoleIODevice();
+        UserSession userSessionHolder=new UserSessionHolder();
+        MenuFactory menuFactory = new MenuFactory(userSessionHolder);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(menuFactory.createLibraryMenu(library,ioDevice));
         bibliotecaApp.takeUserInput(ioDevice);
     }
 
+    private static class UserSessionHolder implements UserSession{
+
+        private LibraryMember sessionLibraryMember=null;
+
+        @Override
+        public void setUser(LibraryMember libraryMember) {
+            this.sessionLibraryMember=libraryMember;
+        }
+
+        @Override
+        public LibraryMember getUser() {
+            return sessionLibraryMember;
+        }
+
+        @Override
+        public void eraseUser() {
+            this.sessionLibraryMember=null;
+        }
+    }
+
 }
+

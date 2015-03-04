@@ -1,5 +1,6 @@
 package com.twu.biblioteca.Library;
 
+import com.twu.biblioteca.UserAccount.LibraryMember;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,7 +32,7 @@ public class MovieItemLibraryTest {
         movieList.add(movieItem1);
         movieList.add(movieItem2);
         library.getMovieLibrary().add(movieList);
-        MovieItem actualMovieItem = library.getMovieLibrary().checkout("movie2", library.getBookLibrary().getLoggedinMember());
+        MovieItem actualMovieItem = library.getMovieLibrary().checkout("movie2",  new LibraryMember("123-4567","Juhi","juhi.jari@gmail.com","12345678","password1"));
         Assert.assertEquals(true,checkEqualMovie(movieItem2 ,actualMovieItem));
 
     }

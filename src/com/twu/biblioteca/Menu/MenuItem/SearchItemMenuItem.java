@@ -15,13 +15,13 @@ public class SearchItemMenuItem implements MenuItem<LibraryManager> {
     @Override
     public void performAction(LibraryManager library,PrintingFormat printingFormat, IODevice ioDevice) throws IOException {
         String msg = printingFormat.printUserInputHeader();
-        ioDevice.write(msg);
+        ioDevice.writeln(msg);
         String title = ioDevice.read();
         ArrayList<LibraryItem> searchedBookItemList = library.search(title);
         if(searchedBookItemList.size()!=0)
-            ioDevice.write(printingFormat.printLibrayItems(searchedBookItemList));
+            ioDevice.writeln(printingFormat.printLibrayItems(searchedBookItemList));
         else
-            ioDevice.write(printingFormat.failureMessage());
+            ioDevice.writeln(printingFormat.failureMessage());
         }
 
 

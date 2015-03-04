@@ -7,7 +7,11 @@ import java.io.IOException;
  */
 public interface IODevice {
 
-    public void write(String message) throws IOException;
+    public void writeln(String message) throws IOException;
+
+    void write(String message);
 
     public String read() throws IOException;
+
+    String readSecurely();
 }
