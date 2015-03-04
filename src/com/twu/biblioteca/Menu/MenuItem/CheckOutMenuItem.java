@@ -13,7 +13,7 @@ public class CheckOutMenuItem implements MenuItem<LibraryManager> {
         String outStatement;
         ioDevice.write(printingFormat.printUserInputHeader());
         String title = ioDevice.read();
-        LibraryItem libraryItem = library.checkout(title);
+        LibraryItem libraryItem = library.checkout(title,library.getLoggedinMember());
         if (libraryItem !=null){
             outStatement=printingFormat.successMessage();
         }

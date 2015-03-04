@@ -18,7 +18,7 @@ public class ReturnItemMenuItem implements MenuItem<LibraryManager> {
         String title;
         ioDevice.write(printingFormat.printUserInputHeader());
         title = ioDevice.read();
-        ArrayList<LibraryItem> itemList = library.returnItem(title);
+        ArrayList<LibraryItem> itemList = library.returnItem(title,library.getLoggedinMember() );
         if (itemList != null) {
             ioDevice.write(printingFormat.printLibrayItems(itemList));
         }

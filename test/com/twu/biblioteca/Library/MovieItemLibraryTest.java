@@ -31,7 +31,7 @@ public class MovieItemLibraryTest {
         movieList.add(movieItem1);
         movieList.add(movieItem2);
         library.getMovieLibrary().add(movieList);
-        MovieItem actualMovieItem = library.getMovieLibrary().checkout("movie2");
+        MovieItem actualMovieItem = library.getMovieLibrary().checkout("movie2", library.getBookLibrary().getLoggedinMember());
         Assert.assertEquals(true,checkEqualMovie(movieItem2 ,actualMovieItem));
 
     }

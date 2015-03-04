@@ -42,7 +42,7 @@ public class BookLibraryTest {
     public void shouldCheckoutBook(){
         BookItem expectedBookItem = new BookItem("book3", "author3", "date3");
         BookItem checkedoutBookItem;
-        checkedoutBookItem = library.getBookLibrary().checkout("book3");
+        checkedoutBookItem = library.getBookLibrary().checkout("book3",library.getBookLibrary().getLoggedinMember() );
         Assert.assertEquals(expectedBookItem.getTitle(), checkedoutBookItem.getTitle());
     }
     @Test
@@ -51,9 +51,9 @@ public class BookLibraryTest {
         expectedBookItemList.add(new BookItem("book1", "author1", "date1"));
         expectedBookItemList.add(new BookItem("book2", "author2", "date2"));
         expectedBookItemList.add(new BookItem("book3", "author3", "date3"));
-        BookItem checkedoutBookItem = library.getBookLibrary().checkout("book3");
+        BookItem checkedoutBookItem = library.getBookLibrary().checkout("book3", library.getBookLibrary().getLoggedinMember());
         ArrayList<BookItem> searchedBookItemList;
-        searchedBookItemList = library.getBookLibrary().returnItem("book3");
+        searchedBookItemList = library.getBookLibrary().returnItem("book3",library.getBookLibrary().getLoggedinMember() );
         Assert.assertTrue(checkEqualBookList(expectedBookItemList, searchedBookItemList));
     }
     private boolean checkEqualBookList(ArrayList<BookItem> expectedBookItemList, ArrayList<BookItem> actaualBookItemList) {
