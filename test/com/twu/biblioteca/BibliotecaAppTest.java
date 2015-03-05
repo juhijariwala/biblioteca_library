@@ -48,6 +48,7 @@ public class BibliotecaAppTest {
         final String menu ="*************************Menu************************\n|\tBook Menu : Press 1\t\n" +
                 "|\tMovie Menu : Press 2\t\n" +
                 "|\tMember Information : Press 3\t\n" +
+                "|\tLogout : Press 4\t\n" +
                 "|\tQuit : Press 0\t\n*****************************************************\n" +
                 "\nEnter your choice:";
         Assert.assertEquals(menu, bibliotecaApp.displayMenu());

@@ -26,7 +26,7 @@ public class CheckOutMainMenuItem implements MenuItem<LibraryCollection>{
             try {
                 choice = Integer.parseInt(ioDevice.read());
                 menu.executeCommand(choice);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e){
                 ioDevice.writeln("Invalid Option!\n");
             }
         }while (choice!=0);

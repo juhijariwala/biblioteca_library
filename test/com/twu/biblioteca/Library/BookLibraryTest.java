@@ -46,6 +46,7 @@ public class BookLibraryTest {
         checkedoutBookItem = library.getBookLibrary().checkout("book3", new LibraryMember("123-4567","Juhi","juhi.jari@gmail.com","12345678","password1"));
         Assert.assertEquals(expectedBookItem.getTitle(), checkedoutBookItem.getTitle());
     }
+
     @Test
     public void shouldReturnBook(){
         ArrayList<BookItem> expectedBookItemList =new ArrayList<BookItem>();
@@ -58,6 +59,7 @@ public class BookLibraryTest {
         searchedBookItemList = library.getBookLibrary().returnItem("book3", libraryMember);
         Assert.assertTrue(checkEqualBookList(expectedBookItemList, searchedBookItemList));
     }
+
     private boolean checkEqualBookList(ArrayList<BookItem> expectedBookItemList, ArrayList<BookItem> actaualBookItemList) {
         if(expectedBookItemList.size()== actaualBookItemList.size()){
             for(int i=0;i< expectedBookItemList.size();i++){

@@ -28,6 +28,7 @@ public class BibliotecaApp {
         return "*************************Menu************************\n|\tBook Menu : Press 1\t\n" +
                 "|\tMovie Menu : Press 2\t\n" +
                 "|\tMember Information : Press 3\t\n" +
+                "|\tLogout : Press 4\t\n" +
                 "|\tQuit : Press 0\t\n*****************************************************\n" +
                 "\nEnter your choice:";
     }
@@ -68,14 +69,14 @@ public class BibliotecaApp {
 
 
         ConsoleIODevice ioDevice = new ConsoleIODevice();
-        UserSession userSessionHolder=new UserSessionHolder();
-        MenuFactory menuFactory = new MenuFactory(userSessionHolder);
+        MemberSession memberSessionHolder =new MemberSessionHolder();
+        MenuFactory menuFactory = new MenuFactory(memberSessionHolder);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(menuFactory.createLibraryMenu(library,ioDevice));
         bibliotecaApp.takeUserInput(ioDevice);
     }
 
-    private static class UserSessionHolder implements UserSession{
+    private static class MemberSessionHolder implements MemberSession {
 
         private LibraryMember sessionLibraryMember=null;
 

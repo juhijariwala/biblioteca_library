@@ -6,7 +6,7 @@ import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Menu.Menu;
 import com.twu.biblioteca.Menu.PrintFormat.BookLibraryPrintingFormat;
 import com.twu.biblioteca.MockIODevice;
-import com.twu.biblioteca.MockUserSessionHolder;
+import com.twu.biblioteca.MockMemberSessionHolder;
 import com.twu.biblioteca.UserAccount.LibraryMember;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,7 +21,7 @@ public class MenuTest {
     private Menu menu;
     private BookLibraryPrintingFormat bookLibraryPrintingFormat;
     LibraryMember libraryMember=  new LibraryMember("123-4567","Juhi","juhi.jari@gmail.com","12345678","password1");
-    MockUserSessionHolder mockUserSessionHolder=new MockUserSessionHolder();
+    MockMemberSessionHolder mockUserSessionHolder=new MockMemberSessionHolder();
     String format = "%1$-20s %2$-20s %3$-20s\n";
 
 
@@ -122,8 +122,8 @@ public class MenuTest {
         menu = new Menu(library.getBookLibrary(),bookLibraryPrintingFormat, ioDevice);
         menu.addCommand(1, new ListMenuItem());
         menu.addCommand(2, new CheckOutMenuItem(mockUserSessionHolder));
-        menu.addCommand(0, new QuitMenuItem());
         menu.addCommand(3, new ReturnMenuItem(mockUserSessionHolder));
+        menu.addCommand(0, new QuitMenuItem());
         menu.executeCommand(2);
         menu.executeCommand(3);
         final StringBuffer expectedOutput = new StringBuffer();
@@ -151,7 +151,7 @@ public class MenuTest {
     public void should_show_login_menu() throws IOException {
             String input = "123-4567\npassword1\nbook3";
             MockIODevice ioDevice = new MockIODevice(input);
-            MockUserSessionHolder mockUserSessionHolder1=new MockUserSessionHolder();
+            MockMemberSessionHolder mockUserSessionHolder1=new MockMemberSessionHolder();
             menu = new Menu(library.getBookLibrary(),bookLibraryPrintingFormat, ioDevice);
             menu.addCommand(3, new LoginMenuItem(new CheckOutMenuItem(mockUserSessionHolder1),mockUserSessionHolder1));
             menu.executeCommand(3);
@@ -164,7 +164,7 @@ public class MenuTest {
     public void should_display_logged_in_memberInfo() throws IOException {
         String input = "123-4567\npassword1\nbook3";
         MockIODevice ioDevice = new MockIODevice(input);
-        MockUserSessionHolder mockUserSessionHolder1=new MockUserSessionHolder();
+        MockMemberSessionHolder mockUserSessionHolder1=new MockMemberSessionHolder();
         menu = new Menu(library.getBookLibrary(),bookLibraryPrintingFormat, ioDevice);
         menu.addCommand(3, new LoginMenuItem(new LibraryMemberInfo(mockUserSessionHolder1),mockUserSessionHolder1));
         menu.executeCommand(3);

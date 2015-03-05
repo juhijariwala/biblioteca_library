@@ -13,6 +13,5 @@ public class QuitMenuItem implements MenuItem<LibraryCollection> {
     @Override
     public void performAction(LibraryCollection library,PrintingFormat printingFormat, IODevice ioDevice) throws IOException {
         ioDevice.writeln("Successfully Exited!!\n");
-        return;
     }
 }

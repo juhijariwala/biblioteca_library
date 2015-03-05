@@ -1,6 +1,6 @@
 package com.twu.biblioteca.Menu.MenuItem;
 
-import com.twu.biblioteca.App.UserSession;
+import com.twu.biblioteca.App.MemberSession;
 import com.twu.biblioteca.Library.LibraryCollection;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.Menu.PrintFormat.PrintingFormat;
@@ -15,32 +15,31 @@ import java.io.IOException;
 public class LoginMenuItem<T extends LibraryCollection> implements MenuItem<LibraryCollection> {
 
     private MenuItem menuItem;
-    private LibraryMember libraryMember;
-    private UserSession userSession;
+    private MemberSession memberSession;
     UserAccount userAccount = new UserAccount();
 
-    public LoginMenuItem(MenuItem menuItem, UserSession userSession) {
+    public LoginMenuItem(MenuItem menuItem, MemberSession memberSession) {
         this.menuItem = menuItem;
-        this.userSession = userSession;
+        this.memberSession = memberSession;
     }
 
     @Override
     public void performAction(LibraryCollection library, PrintingFormat printingFormat, IODevice ioDevice) throws IOException {
-        if (userSession.getUser() == null) {
+        if (memberSession.getUser() == null) {
             ioDevice.write("\nEnter LibraryID:");
             String libraryID = ioDevice.read();
             ioDevice.write("\nEnter Password:");
             String pwd = ioDevice.read();
-            libraryMember = userAccount.login(libraryID, pwd);
-            userSession.setUser(libraryMember);
+            LibraryMember libraryMember = userAccount.login(libraryID, pwd);
+            memberSession.setUser(libraryMember);
             if (libraryMember != null) {
-                ioDevice.write("\nSuccessfully logged in!!\n");
+                ioDevice.write("\nSuccessfully logged in!!\n\n");
                 menuItem.performAction(library, printingFormat, ioDevice);
             } else {
-                ioDevice.write("\nInvalid Username or Password!!");
-                return;
+                ioDevice.write("\nInvalid Username or Password!!\n\n");
             }
+        } else {
+            menuItem.performAction(library, printingFormat, ioDevice);
         }
-        else    menuItem.performAction(library, printingFormat, ioDevice);
     }
 }

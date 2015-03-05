@@ -35,7 +35,7 @@ public class CheckOutBookMenuItemTest {
         MockIODevice ioDevice=new MockIODevice(input);
         menu =new Menu(library.getBookLibrary(),bookLibraryPrintingFormat,ioDevice);
         LibraryMember libraryMember=  new LibraryMember("123-4567","Juhi","juhi.jari@gmail.com","12345678","password1");
-        MockUserSessionHolder mockUserSessionHolder=new MockUserSessionHolder();
+        MockMemberSessionHolder mockUserSessionHolder=new MockMemberSessionHolder();
         mockUserSessionHolder.setUser(libraryMember);
         CheckOutMenuItem checkOutBookLibraryAction=new CheckOutMenuItem(mockUserSessionHolder);
         checkOutBookLibraryAction.performAction(library.getBookLibrary(),bookLibraryPrintingFormat,ioDevice);

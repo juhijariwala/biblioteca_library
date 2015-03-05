@@ -33,7 +33,7 @@ public class MovieLibraryPrintingFormat implements PrintingFormat<MovieItem> {
     @Override
     public String mainMenuStatement() {
         return "**********************Movie Menu**********************\n|\tList Movie : Press 1\t\n" +
-                "|\tCheck Out Movie : Press 2\t\n" +
+                    "|\tCheck Out Movie : Press 2\t\n" +
                 "|\tQuit : Press 0\t\n*****************************************************\n" +
                 "\nEnter your choice:";
     }

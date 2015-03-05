@@ -8,20 +8,24 @@ import com.twu.biblioteca.Menu.PrintFormat.PrintingFormat;
 import java.io.IOException;
 
 /**
- * Created by juhijariwala on 04/03/15.
+ * Created by juhijariwala on 05/03/15.
  */
-public class LibraryMemberInfo implements MenuItem {
+public class LogoutMenuItem  implements MenuItem{
     private MemberSession memberSession;
-    public LibraryMemberInfo(MemberSession memberSession) {
+    public LogoutMenuItem(MemberSession memberSession) {
         this.memberSession = memberSession;
     }
 
     @Override
     public void performAction(LibraryCollection library, PrintingFormat printingFormat, IODevice ioDevice) throws IOException {
-        String outStatement="Name : "+ memberSession.getUser().getName()+"\n";
-        outStatement+="Email : "+ memberSession.getUser().getEmailAddress()+"\n";
-        outStatement+="Phone No : "+ memberSession.getUser().getPhoneNumber()+"\n";
 
-        ioDevice.writeln(outStatement);
+        if(memberSession.getUser()==null){
+            ioDevice.writeln("You are not Logged in!!\n");
+        }
+        else {
+            memberSession.eraseUser();
+            ioDevice.writeln("Successfully logged out!!");
+        }
+
     }
 }

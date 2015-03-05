@@ -1,6 +1,6 @@
 package com.twu.biblioteca.Menu;
 
-import com.twu.biblioteca.App.UserSession;
+import com.twu.biblioteca.App.MemberSession;
 import com.twu.biblioteca.Library.*;
 import com.twu.biblioteca.Menu.MenuItem.*;
 import com.twu.biblioteca.Menu.PrintFormat.BookLibraryPrintingFormat;
@@ -12,10 +12,10 @@ import com.twu.biblioteca.Menu.PrintFormat.MovieLibraryPrintingFormat;
  */
 public class MenuFactory {
 
-    UserSession userSession;
+    MemberSession memberSession;
 
-    public MenuFactory(UserSession userSession) {
-        this.userSession = userSession;
+    public MenuFactory(MemberSession memberSession) {
+        this.memberSession = memberSession;
     }
 
     public Menu createMovieMenu(LibraryCollection<MovieItem> movieList, ConsoleIODevice ioDevice)  {
@@ -25,9 +25,9 @@ public class MenuFactory {
         movieMenu.addCommand(0, new QuitMenuItem());
 
         Menu movieCheckoutSubmenu = new Menu<MovieItem>(movieList,movieLibraryPrintingFormat, ioDevice);
-        movieMenu.addCommand(2, new LoginMenuItem(new CheckOutMainMenuItem(movieCheckoutSubmenu),userSession));
+        movieMenu.addCommand(2, new LoginMenuItem(new CheckOutMainMenuItem(movieCheckoutSubmenu), memberSession));
         movieCheckoutSubmenu.addCommand(1, new SearchMenuItem());
-        movieCheckoutSubmenu.addCommand(2, new CheckOutMenuItem(userSession));
+        movieCheckoutSubmenu.addCommand(2, new CheckOutMenuItem(memberSession));
         movieCheckoutSubmenu.addCommand(0, new QuitMenuItem());
         return movieMenu;
     }
@@ -43,15 +43,15 @@ public class MenuFactory {
         Menu bookMenu = new Menu<BookItem>(bookList, bookLibraryPrintingFormat, ioDevice);
         bookMenu.addCommand(1, new ListMenuItem());
         bookMenu.addCommand(0, new QuitMenuItem());
-        bookMenu.addCommand(3, new LoginMenuItem(new ReturnMenuItem(userSession),userSession) );
+        bookMenu.addCommand(3, new LoginMenuItem(new ReturnMenuItem(memberSession), memberSession) );
 
         Menu bookCheckoutSubmenu = new Menu<BookItem>(bookList,bookLibraryPrintingFormat, ioDevice);
         bookCheckoutSubmenu.addCommand(1, new SearchMenuItem());
-        bookCheckoutSubmenu.addCommand(2, new CheckOutMenuItem(userSession));
+        bookCheckoutSubmenu.addCommand(2, new CheckOutMenuItem(memberSession));
         bookCheckoutSubmenu.addCommand(0, new QuitMenuItem());
 
         CheckOutMainMenuItem checkOutMainMenuItem =new CheckOutMainMenuItem(bookCheckoutSubmenu);
-        bookMenu.addCommand(2, new LoginMenuItem(checkOutMainMenuItem, userSession));
+        bookMenu.addCommand(2, new LoginMenuItem(checkOutMainMenuItem, memberSession));
         return bookMenu;
     }
     public Menu createBookMainMenu (LibraryCollection<BookItem> library, ConsoleIODevice ioDevice) {
@@ -64,7 +64,13 @@ public class MenuFactory {
     public Menu  createMemberInfoMenu(LibraryCollection<LibraryItem> library, ConsoleIODevice ioDevice){
         BookLibraryPrintingFormat bookLibraryPrintingFormat=new BookLibraryPrintingFormat();
         Menu<LibraryItem> memberInfoMenuItem=new Menu<LibraryItem>(library,bookLibraryPrintingFormat,ioDevice);
-        memberInfoMenuItem.addCommand(0,new LoginMenuItem(new LibraryMemberInfo(userSession),userSession));
+        memberInfoMenuItem.addCommand(0,new LoginMenuItem(new LibraryMemberInfo(memberSession), memberSession));
+        return memberInfoMenuItem;
+    }
+    public Menu  createLogoutMenu(LibraryCollection<LibraryItem> library, ConsoleIODevice ioDevice){
+        BookLibraryPrintingFormat bookLibraryPrintingFormat=new BookLibraryPrintingFormat();
+        Menu<LibraryItem> memberInfoMenuItem=new Menu<LibraryItem>(library,bookLibraryPrintingFormat,ioDevice);
+        memberInfoMenuItem.addCommand(0,new LogoutMenuItem(memberSession));
         return memberInfoMenuItem;
     }
 
@@ -79,6 +85,7 @@ public class MenuFactory {
         menuManager.addMainMenuList(1, createBookMainMenu(library.getBookLibrary(),ioDevice));
         menuManager.addMainMenuList(2, createMovieMainMenu(library.getMovieLibrary(),ioDevice));
         menuManager.addMainMenuList(3, createMemberInfoMenu(new LibraryCollection<LibraryItem>(), ioDevice));
+        menuManager.addMainMenuList(4, createLogoutMenu(new LibraryCollection<LibraryItem>(), ioDevice));
         menuManager.addMainMenuList(0,quitMainMenu);
         return menuManager;
     }
