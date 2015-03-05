@@ -12,7 +12,6 @@ public class MovieItemTest {
 
     }
 
-
     private boolean equalMovie(MovieItem expected,MovieItem actual){
         if (expected.getTitle()== actual.getTitle()&& expected.getDirector() == actual.getDirector()) {
             return true;

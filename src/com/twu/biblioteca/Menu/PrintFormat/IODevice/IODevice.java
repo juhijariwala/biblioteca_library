@@ -9,7 +9,7 @@ public interface IODevice {
 
     public void writeln(String message) throws IOException;
 
-    void write(String message);
+    void write(String message) throws IOException;
 
     public String read() throws IOException;
 

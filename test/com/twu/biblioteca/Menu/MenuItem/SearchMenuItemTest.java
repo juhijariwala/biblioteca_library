@@ -1,12 +1,13 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.Menu.MenuItem;
 
 import com.twu.biblioteca.Library.BookItem;
 import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Menu.MenuItem.ListMenuItem;
-import com.twu.biblioteca.Menu.MenuItem.Menu;
+import com.twu.biblioteca.Menu.Menu;
 import com.twu.biblioteca.Menu.MenuItem.QuitMenuItem;
-import com.twu.biblioteca.Menu.MenuItem.SearchItemMenuItem;
+import com.twu.biblioteca.Menu.MenuItem.SearchMenuItem;
 import com.twu.biblioteca.Menu.PrintFormat.BookLibraryPrintingFormat;
+import com.twu.biblioteca.MockIODevice;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SearchBookItemMenuLibraryItemTest {
+public class SearchMenuItemTest {
     private Library library;
     private Menu menu;
     private MockIODevice ioDevice;
@@ -33,13 +34,13 @@ public class SearchBookItemMenuLibraryItemTest {
         menu =new Menu(library.getBookLibrary(),bookLibraryPrintingFormat,ioDevice);
         menu.addCommand(1, new ListMenuItem());
         menu.addCommand(0, new QuitMenuItem());
-        menu.addCommand(2, new SearchItemMenuItem());
+        menu.addCommand(2, new SearchMenuItem());
     }
     @Test
     public void should_search_book_PerformAction() throws IOException {
         String input="book1";
         MockIODevice ioDevice=new MockIODevice(input);
-        SearchItemMenuItem searchBookLibraryAction=new SearchItemMenuItem();
+        SearchMenuItem searchBookLibraryAction=new SearchMenuItem();
         searchBookLibraryAction.performAction(library.getBookLibrary(),bookLibraryPrintingFormat,ioDevice);
         final StringBuffer expectedOutput = new StringBuffer();
         expectedOutput.append("******************************************************\n");

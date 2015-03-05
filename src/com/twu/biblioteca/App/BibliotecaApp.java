@@ -3,8 +3,8 @@ package com.twu.biblioteca.App;
 import com.twu.biblioteca.Library.BookItem;
 import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Library.MovieItem;
-import com.twu.biblioteca.Menu.MenuItem.MenuFactory;
-import com.twu.biblioteca.Menu.MenuItem.MenuManager;
+import com.twu.biblioteca.Menu.MenuFactory;
+import com.twu.biblioteca.Menu.MenuManager;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.ConsoleIODevice;
 import com.twu.biblioteca.UserAccount.LibraryMember;
@@ -27,6 +27,7 @@ public class BibliotecaApp {
     public String displayMenu() {
         return "*************************Menu************************\n|\tBook Menu : Press 1\t\n" +
                 "|\tMovie Menu : Press 2\t\n" +
+                "|\tMember Information : Press 3\t\n" +
                 "|\tQuit : Press 0\t\n*****************************************************\n" +
                 "\nEnter your choice:";
     }

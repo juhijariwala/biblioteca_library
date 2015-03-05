@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ListMovieItemMenuLibraryItemTest {
+public class ListMovieMenuItemTest {
     String format = "%1$-20s %2$-20s %3$-20s %4$-20s\n";
     @Test
     public void should_print_list_of_movies() throws IOException {

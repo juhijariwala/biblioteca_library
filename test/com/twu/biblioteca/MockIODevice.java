@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.*;
 
@@ -31,8 +30,10 @@ public class MockIODevice implements IODevice {
     }
 
     @Override
-    public void write(String message) {
-        throw new NotImplementedException();
+    public void write(String message) throws IOException {
+        out= new ByteArrayOutputStream();
+        out.write(message.getBytes());
+        PrintStream printStream=new PrintStream(out);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.twu.biblioteca.Menu.MenuItem;
 
-import com.twu.biblioteca.Library.LibraryManager;
+import com.twu.biblioteca.Library.LibraryCollection;
+import com.twu.biblioteca.Menu.Menu;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.Menu.PrintFormat.PrintingFormat;
 
@@ -9,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by juhijariwala on 02/03/15.
  */
-public class MainMenuItem implements MenuItem<LibraryManager>{
+public class MainMenuItem implements MenuItem<LibraryCollection>{
     private Menu menu;
 
     public MainMenuItem(Menu menu) {
@@ -17,7 +18,7 @@ public class MainMenuItem implements MenuItem<LibraryManager>{
     }
 
     @Override
-    public void performAction(LibraryManager library,PrintingFormat printingFormat, IODevice ioDevice) throws IOException {
+    public void performAction(LibraryCollection library,PrintingFormat printingFormat, IODevice ioDevice) throws IOException {
         Integer choice=-1;
         do{
             ioDevice.writeln(printingFormat.mainMenuStatement());

@@ -4,8 +4,8 @@ import com.twu.biblioteca.App.BibliotecaApp;
 import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Library.BookItem;
 import com.twu.biblioteca.Menu.MenuItem.MainMenuItem;
-import com.twu.biblioteca.Menu.MenuItem.Menu;
-import com.twu.biblioteca.Menu.MenuItem.MenuManager;
+import com.twu.biblioteca.Menu.Menu;
+import com.twu.biblioteca.Menu.MenuManager;
 import com.twu.biblioteca.Menu.PrintFormat.BookLibraryPrintingFormat;
 import org.junit.Assert;
 import org.junit.Before;
@@ -47,6 +47,7 @@ public class BibliotecaAppTest {
     public void shouldDisplayMenu() {
         final String menu ="*************************Menu************************\n|\tBook Menu : Press 1\t\n" +
                 "|\tMovie Menu : Press 2\t\n" +
+                "|\tMember Information : Press 3\t\n" +
                 "|\tQuit : Press 0\t\n*****************************************************\n" +
                 "\nEnter your choice:";
         Assert.assertEquals(menu, bibliotecaApp.displayMenu());

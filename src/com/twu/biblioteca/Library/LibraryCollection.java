@@ -9,7 +9,7 @@ import java.util.HashMap;
 /**
  * Created by juhijariwala on 02/03/15.
  */
-public class LibraryManager<T extends LibraryItem> {
+public class LibraryCollection<T extends LibraryItem> {
 
     private ArrayList<T> itemList = new ArrayList<T>();
 

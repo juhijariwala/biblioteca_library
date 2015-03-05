@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Library.BookItem;
-import com.twu.biblioteca.Menu.MenuItem.Menu;
+import com.twu.biblioteca.Menu.Menu;
 import com.twu.biblioteca.Menu.MenuItem.CheckOutMenuItem;
 import com.twu.biblioteca.Menu.PrintFormat.BookLibraryPrintingFormat;
 import com.twu.biblioteca.UserAccount.LibraryMember;
@@ -13,7 +13,7 @@ import org.junit.Test;
 import java.io.*;
 import java.util.ArrayList;
 
-public class CheckOutBookItemMenuLibraryItemTest {
+public class CheckOutBookMenuItemTest {
     private Library library;
     private Menu menu;
     private BookLibraryPrintingFormat bookLibraryPrintingFormat;

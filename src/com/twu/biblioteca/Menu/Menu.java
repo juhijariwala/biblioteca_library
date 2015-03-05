@@ -1,7 +1,8 @@
-package com.twu.biblioteca.Menu.MenuItem;
+package com.twu.biblioteca.Menu;
 
 import com.twu.biblioteca.Library.LibraryItem;
-import com.twu.biblioteca.Library.LibraryManager;
+import com.twu.biblioteca.Library.LibraryCollection;
+import com.twu.biblioteca.Menu.MenuItem.MenuItem;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.Menu.PrintFormat.PrintingFormat;
 
@@ -11,11 +12,11 @@ import java.util.HashMap;
 public class Menu<T extends LibraryItem> {
 
     private HashMap<Integer, MenuItem> libraryCommands = new HashMap<Integer, MenuItem>();
-    private LibraryManager<T> library;
+    private LibraryCollection<T> library;
     IODevice ioDevice;
     PrintingFormat printingFormat;
 
-    public Menu(LibraryManager<T> library, PrintingFormat printingFormat, IODevice ioDevice) {
+    public Menu(LibraryCollection<T> library, PrintingFormat printingFormat, IODevice ioDevice) {
         this.library = library;
         this.ioDevice = ioDevice;
         this.printingFormat=printingFormat;
