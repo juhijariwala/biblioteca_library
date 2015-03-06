@@ -56,8 +56,10 @@ public class SecurityMenuItem<T extends LibraryCollection> implements MenuItem<L
         if ( authorisedRole.equals(Role.PUBLIC))
             return true;
         if (authorisedRole.equals(Role.LIBRARIAN)) {
-            if (authorisedRole.equals(memberSession.getUser().getRole()))
+            if (authorisedRole.equals(memberSession.getUser().getRole())) {
+
                 return true;
+            }
         }
         return false;
     }

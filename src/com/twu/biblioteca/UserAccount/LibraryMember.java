@@ -41,8 +41,8 @@ public class LibraryMember {
         return password;
     }
 
-    public String getRole() {
-        return role.toString();
+    public Role getRole() {
+        return role;
     }
 
 }
