@@ -5,6 +5,7 @@ import com.twu.biblioteca.UserAccount.LibraryMember;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by juhijariwala on 02/03/15.
@@ -14,11 +15,6 @@ public class LibraryCollection<T extends LibraryItem> {
     private ArrayList<T> itemList = new ArrayList<T>();
 
     private HashMap<LibraryMember, ArrayList<LibraryItem>> checkedOutItems = new HashMap<LibraryMember, ArrayList<LibraryItem>>();
-
-
-    public HashMap<LibraryMember, ArrayList<LibraryItem>> getCheckedOutItems() {
-        return checkedOutItems;
-    }
 
 
     public void add(ArrayList<T> t) {
@@ -71,6 +67,15 @@ public class LibraryCollection<T extends LibraryItem> {
         return null;
     }
 
+    public ArrayList<T> checkoutItemsByMember(String libraryID) {
+        ArrayList<T> chekedoutItems=new ArrayList<T>();
+        for(Map.Entry<LibraryMember,ArrayList<LibraryItem>> pair:checkedOutItems.entrySet()){
+            if(libraryID.equals(pair.getKey().getLibraryID())){
+                return (ArrayList<T>) pair.getValue();
+            }
+        }
+        return chekedoutItems;
+    }
 }
 
 

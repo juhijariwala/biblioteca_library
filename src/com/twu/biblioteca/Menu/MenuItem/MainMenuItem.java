@@ -3,7 +3,6 @@ package com.twu.biblioteca.Menu.MenuItem;
 import com.twu.biblioteca.Library.LibraryCollection;
 import com.twu.biblioteca.Menu.Menu;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
-import com.twu.biblioteca.Menu.PrintFormat.PrintingFormat;
 
 import java.io.IOException;
 
@@ -18,17 +17,23 @@ public class MainMenuItem implements MenuItem<LibraryCollection>{
     }
 
     @Override
-    public void performAction(LibraryCollection library,PrintingFormat printingFormat, IODevice ioDevice) throws IOException {
-        Integer choice=-1;
+    public void performAction(LibraryCollection library, IODevice ioDevice) throws IOException {
+        Integer choice;
         do{
-            ioDevice.writeln(printingFormat.mainMenuStatement());
-            try {
-                choice = Integer.parseInt(ioDevice.read());
+            ioDevice.writeln(menu.menuFormat());
+                choice = ioDevice.readInt();
                 menu.executeCommand(choice);
-            }catch (NumberFormatException e){
-                ioDevice.writeln("Invalid Option!\n");
-            }
         }while (choice!=0);
 
+    }
+
+    @Override
+    public String printMenu() {
+        return null;
+    }
+
+    @Override
+    public boolean shouldShowMenu() {
+        return true;
     }
 }

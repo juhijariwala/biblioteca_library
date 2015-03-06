@@ -1,7 +1,7 @@
 package com.twu.biblioteca.Library;
 
-import com.twu.biblioteca.Menu.PrintFormat.BookLibraryPrintingFormat;
 import com.twu.biblioteca.UserAccount.LibraryMember;
+import com.twu.biblioteca.UserAccount.Role;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,65 +10,76 @@ import java.util.ArrayList;
 
 public class BookLibraryTest {
     private Library library = new Library();
-    private BookLibraryPrintingFormat bookLibraryPrintingFormat;
 
     @Before
     public void setUp(){
-        ArrayList<BookItem> bookList=new ArrayList<BookItem>();
-        bookList.add(new BookItem("book1", "author1", "date1"));
-        bookList.add(new BookItem("book2", "author2", "date2"));
-        bookList.add(new BookItem("book3", "author3", "date3"));
+        ArrayList<Book> bookList=new ArrayList<Book>();
+        bookList.add(new Book("book1", "author1", "date1"));
+        bookList.add(new Book("book2", "author2", "date2"));
+        bookList.add(new Book("book3", "author3", "date3"));
         library.getBookLibrary().add(bookList);
-        bookLibraryPrintingFormat =new BookLibraryPrintingFormat();
     }
     @Test
     public void shouldGetListOfBooks() {
-        ArrayList<BookItem> expectedBookItemList = new ArrayList<BookItem>();
-        expectedBookItemList.add(new BookItem("book1", "author1", "date1"));
-        expectedBookItemList.add(new BookItem("book2", "author2", "date2"));
-        expectedBookItemList.add(new BookItem("book3", "author3", "date3"));
-        Assert.assertTrue(checkEqualBookList(expectedBookItemList, library.getBookLibrary().getItemList()));
+        ArrayList<Book> expectedBookList = new ArrayList<Book>();
+        expectedBookList.add(new Book("book1", "author1", "date1"));
+        expectedBookList.add(new Book("book2", "author2", "date2"));
+        expectedBookList.add(new Book("book3", "author3", "date3"));
+        Assert.assertTrue(checkEqualBookList(expectedBookList, library.getBookLibrary().getItemList()));
 
     }
 
     @Test
     public void shouldSearchBook(){
-        ArrayList<BookItem> expectedBookItemList =new ArrayList<BookItem>();
-        expectedBookItemList.add(new BookItem("book3", "author3", "date3"));
-        ArrayList<BookItem> searchedBookItemList;
-        searchedBookItemList = library.getBookLibrary().search("book3");
-        Assert.assertTrue(checkEqualBookList(expectedBookItemList, searchedBookItemList));
+        ArrayList<Book> expectedBookList =new ArrayList<Book>();
+        expectedBookList.add(new Book("book3", "author3", "date3"));
+        ArrayList<Book> searchedBookList;
+        searchedBookList = library.getBookLibrary().search("book3");
+        Assert.assertTrue(checkEqualBookList(expectedBookList, searchedBookList));
     }
     @Test
     public void shouldCheckoutBook(){
-        BookItem expectedBookItem = new BookItem("book3", "author3", "date3");
-        BookItem checkedoutBookItem;
-        checkedoutBookItem = library.getBookLibrary().checkout("book3", new LibraryMember("123-4567","Juhi","juhi.jari@gmail.com","12345678","password1"));
-        Assert.assertEquals(expectedBookItem.getTitle(), checkedoutBookItem.getTitle());
+        Book expectedBook = new Book("book3", "author3", "date3");
+        Book checkedOutBook;
+        checkedOutBook = library.getBookLibrary().checkout("book3", new LibraryMember("123-4567","Juhi","juhi.jari@gmail.com","12345678","password1", Role.USER));
+        Assert.assertEquals(expectedBook.getTitle(), checkedOutBook.getTitle());
     }
 
     @Test
     public void shouldReturnBook(){
-        ArrayList<BookItem> expectedBookItemList =new ArrayList<BookItem>();
-        expectedBookItemList.add(new BookItem("book1", "author1", "date1"));
-        expectedBookItemList.add(new BookItem("book2", "author2", "date2"));
-        expectedBookItemList.add(new BookItem("book3", "author3", "date3"));
-        LibraryMember libraryMember=  new LibraryMember("123-4567","Juhi","juhi.jari@gmail.com","12345678","password1");
-        BookItem checkedoutBookItem = library.getBookLibrary().checkout("book3",libraryMember);
-        ArrayList<BookItem> searchedBookItemList;
-        searchedBookItemList = library.getBookLibrary().returnItem("book3", libraryMember);
-        Assert.assertTrue(checkEqualBookList(expectedBookItemList, searchedBookItemList));
+        ArrayList<Book> expectedBookList =new ArrayList<Book>();
+        expectedBookList.add(new Book("book1", "author1", "date1"));
+        expectedBookList.add(new Book("book2", "author2", "date2"));
+        expectedBookList.add(new Book("book3", "author3", "date3"));
+        LibraryMember libraryMember=  new LibraryMember("123-4567","Juhi","juhi.jari@gmail.com","12345678","password1",Role.USER);
+        library.getBookLibrary().checkout("book3",libraryMember);
+        ArrayList<Book> searchedBookList;
+        searchedBookList = library.getBookLibrary().returnItem("book3", libraryMember);
+        Assert.assertTrue(checkEqualBookList(expectedBookList, searchedBookList));
+    }
+    @Test
+    public void should_display_checkedout_book_by_memeber(){
+        ArrayList<Book> expectedBookList =new ArrayList<Book>();
+        expectedBookList.add(new Book("book2", "author2", "date2"));
+        expectedBookList.add(new Book("book3", "author3", "date3"));
+        LibraryMember libraryMember=  new LibraryMember("123-4567","Juhi","juhi.jari@gmail.com","12345678","password1",Role.USER);
+        library.getBookLibrary().checkout("book2",libraryMember);
+        library.getBookLibrary().checkout("book3",libraryMember);
+        ArrayList<Book> bookList;
+        bookList = library.getBookLibrary().checkoutItemsByMember(libraryMember.getLibraryID());
+        Assert.assertTrue(checkEqualBookList(expectedBookList, bookList));
+
     }
 
-    private boolean checkEqualBookList(ArrayList<BookItem> expectedBookItemList, ArrayList<BookItem> actaualBookItemList) {
-        if(expectedBookItemList.size()== actaualBookItemList.size()){
-            for(int i=0;i< expectedBookItemList.size();i++){
+    private boolean checkEqualBookList(ArrayList<Book> expectedBookList, ArrayList<Book> actaualBookList) {
+        if(expectedBookList.size()== actaualBookList.size()){
+            for(int i=0;i< expectedBookList.size();i++){
 
-                if (expectedBookItemList.get(i).getTitle()!= actaualBookItemList.get(i).getTitle()) {
+                if (expectedBookList.get(i).getTitle()!= actaualBookList.get(i).getTitle()) {
                     return false;
-                } else if (expectedBookItemList.get(i).getPublishDate()!= actaualBookItemList.get(i).getPublishDate()) {
+                } else if (expectedBookList.get(i).getPublishDate()!= actaualBookList.get(i).getPublishDate()) {
                     return false;
-                } else if (expectedBookItemList.get(i).getAuthor()!= actaualBookItemList.get(i).getAuthor()) {
+                } else if (expectedBookList.get(i).getAuthor()!= actaualBookList.get(i).getAuthor()) {
                     return false;
                 }
             }

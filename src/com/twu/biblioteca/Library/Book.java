@@ -1,6 +1,6 @@
 package com.twu.biblioteca.Library;
 
-public class BookItem implements LibraryItem {
+public class Book implements LibraryItem {
 
 
     private String title;
@@ -21,7 +21,7 @@ public class BookItem implements LibraryItem {
     }
 
 
-    public BookItem(String title, String author, String publishDate) {
+    public Book(String title, String author, String publishDate) {
         this.title = title;
         this.author = author;
         this.publishDate = publishDate;

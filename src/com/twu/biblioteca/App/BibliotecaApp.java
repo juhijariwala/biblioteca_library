@@ -1,8 +1,8 @@
 package com.twu.biblioteca.App;
 
-import com.twu.biblioteca.Library.BookItem;
+import com.twu.biblioteca.Library.Book;
 import com.twu.biblioteca.Library.Library;
-import com.twu.biblioteca.Library.MovieItem;
+import com.twu.biblioteca.Library.Movie;
 import com.twu.biblioteca.Menu.MenuFactory;
 import com.twu.biblioteca.Menu.MenuManager;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
@@ -24,13 +24,17 @@ public class BibliotecaApp {
         return "Welcome to Bibliotica App!!\n";
     }
 
-    public String displayMenu() {
-        return "*************************Menu************************\n|\tBook Menu : Press 1\t\n" +
-                "|\tMovie Menu : Press 2\t\n" +
-                "|\tMember Information : Press 3\t\n" +
-                "|\tLogout : Press 4\t\n" +
-                "|\tQuit : Press 0\t\n*****************************************************\n" +
-                "\nEnter your choice:";
+    public String[] displayMenu() {
+        String menu[] = new String[]{"*************************Menu************************",
+                "|\tBook Menu:Press 1\t ",
+                "|\tMovie Menu : Press 2\t",
+                "|\tMember Information : Press 3\t",
+                "|\tLogout : Press 4\t",
+                "|	Quit : Press 0",
+                "*****************************************************",
+                "Enter your choice:" };
+
+        return menu;
     }
 
     public void takeUserInput(IODevice ioDevice) throws IOException {
@@ -55,34 +59,34 @@ public class BibliotecaApp {
         Library library;
         library = new Library();
 
-        ArrayList<BookItem> bookList=new ArrayList<BookItem>();
-        bookList.add(new BookItem("two states", "Chetan Bhagat", "1/09/2014"));
-        bookList.add(new BookItem("wings of fire", "APJ Abdul Kalam", "12/1/1999"));
-        bookList.add(new BookItem("Harry Potter", "J. K. Rowling", "04/10/2001"));
+        ArrayList<Book> bookList = new ArrayList<Book>();
+        bookList.add(new Book("two states", "Chetan Bhagat", "1/09/2014"));
+        bookList.add(new Book("wings of fire", "APJ Abdul Kalam", "12/1/1999"));
+        bookList.add(new Book("Harry Potter", "J. K. Rowling", "04/10/2001"));
         library.getBookLibrary().add(bookList);
 
-        ArrayList<MovieItem> movieList=new ArrayList<MovieItem>();
-        movieList.add(new MovieItem("gangs of Wasseypur", 2012, "anurag kashyap", "8"));
-        movieList.add(new MovieItem("fandry", 2014, "nagraj manjule", "9"));
-        movieList.add(new MovieItem("gangs of Wasseypur2", 2014, "anurag kashyap", "9"));
+        ArrayList<Movie> movieList = new ArrayList<Movie>();
+        movieList.add(new Movie("gangs of Wasseypur", 2012, "anurag kashyap", "8"));
+        movieList.add(new Movie("fandry", 2014, "nagraj manjule", "9"));
+        movieList.add(new Movie("gangs of Wasseypur2", 2014, "anurag kashyap", "9"));
         library.getMovieLibrary().add(movieList);
 
 
         ConsoleIODevice ioDevice = new ConsoleIODevice();
-        MemberSession memberSessionHolder =new MemberSessionHolder();
+        MemberSession memberSessionHolder = new MemberSessionHolder();
         MenuFactory menuFactory = new MenuFactory(memberSessionHolder);
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(menuFactory.createLibraryMenu(library,ioDevice));
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(menuFactory.createLibraryMenu(library, ioDevice));
         bibliotecaApp.takeUserInput(ioDevice);
     }
 
     private static class MemberSessionHolder implements MemberSession {
 
-        private LibraryMember sessionLibraryMember=null;
+        private LibraryMember sessionLibraryMember = null;
 
         @Override
         public void setUser(LibraryMember libraryMember) {
-            this.sessionLibraryMember=libraryMember;
+            this.sessionLibraryMember = libraryMember;
         }
 
         @Override
@@ -92,7 +96,7 @@ public class BibliotecaApp {
 
         @Override
         public void eraseUser() {
-            this.sessionLibraryMember=null;
+            this.sessionLibraryMember = null;
         }
     }
 

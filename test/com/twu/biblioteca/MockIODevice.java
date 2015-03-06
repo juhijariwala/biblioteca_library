@@ -21,19 +21,23 @@ public class MockIODevice implements IODevice {
     }
 
     @Override
-    public void writeln(String message) throws IOException {
+    public void writeln(String... message) throws IOException {
 
         out= new ByteArrayOutputStream();
-        out.write(message.getBytes());
-        PrintStream printStream=new PrintStream(out);
+        for (String msg:message) {
+            out.write(msg.getBytes());
+            PrintStream printStream = new PrintStream(out);
+        }
 
     }
 
     @Override
-    public void write(String message) throws IOException {
+    public void write(String... message) throws IOException {
         out= new ByteArrayOutputStream();
-        out.write(message.getBytes());
-        PrintStream printStream=new PrintStream(out);
+        for (String msg:message) {
+            out.write(msg.getBytes());
+            PrintStream printStream = new PrintStream(out);
+        }
     }
 
     @Override
@@ -43,7 +47,18 @@ public class MockIODevice implements IODevice {
     }
 
     @Override
-    public String readSecurely() {
+    public String readWithLabel(String label) throws IOException {
+        write(label);
+        return read();
+    }
+
+    @Override
+    public Integer readInt() throws IOException {
         return null;
+    }
+
+    @Override
+    public String readSecurely() throws IOException {
+        return read();
     }
 }

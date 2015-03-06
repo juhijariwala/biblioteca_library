@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.App.BibliotecaApp;
 import com.twu.biblioteca.Library.Library;
-import com.twu.biblioteca.Library.BookItem;
+import com.twu.biblioteca.Library.Book;
 import com.twu.biblioteca.Menu.MenuItem.MainMenuItem;
 import com.twu.biblioteca.Menu.Menu;
 import com.twu.biblioteca.Menu.MenuManager;
@@ -23,14 +23,14 @@ public class BibliotecaAppTest {
     public void setUp() {
         bookLibraryPrintingFormat=new BookLibraryPrintingFormat();
         library = new Library();
-        ArrayList<BookItem> bookList=new ArrayList<BookItem>();
-        bookList.add(new BookItem("book1", "author1", "date1"));
-        bookList.add(new BookItem("book2", "author2", "date2"));
-        bookList.add(new BookItem("book3", "author3", "date3"));
+        ArrayList<Book> bookList=new ArrayList<Book>();
+        bookList.add(new Book("book1", "author1", "date1"));
+        bookList.add(new Book("book2", "author2", "date2"));
+        bookList.add(new Book("book3", "author3", "date3"));
         library.getBookLibrary().add(bookList);
-        menu = new Menu(library.getBookLibrary(),bookLibraryPrintingFormat, new MockIODevice("1"));
+        menu = new Menu(library.getBookLibrary(), new MockIODevice("1"),"Book");
         MenuManager menuManager=new MenuManager();
-        Menu bookMainMenu=new Menu(library.getBookLibrary(),bookLibraryPrintingFormat,new MockIODevice("1"));
+        Menu bookMainMenu=new Menu(library.getBookLibrary(),new MockIODevice("1"),"Book");
         bookMainMenu.addCommand(0,new MainMenuItem(menu));
         menuManager.addMainMenuList(1,bookMainMenu);
         bibliotecaApp = new BibliotecaApp(menuManager);
@@ -45,12 +45,15 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldDisplayMenu() {
-        final String menu ="*************************Menu************************\n|\tBook Menu : Press 1\t\n" +
-                "|\tMovie Menu : Press 2\t\n" +
-                "|\tMember Information : Press 3\t\n" +
-                "|\tLogout : Press 4\t\n" +
-                "|\tQuit : Press 0\t\n*****************************************************\n" +
-                "\nEnter your choice:";
+        String menu[] = new String[]{"*************************Menu************************",
+                "|\tBook Menu:Press 1\t ",
+                "|\tMovie Menu : Press 2\t",
+                "|\tMember Information : Press 3\t",
+                "|\tLogout : Press 4\t",
+                "|	Quit : Press 0",
+                "*****************************************************",
+                "Enter your choice:" };
+
         Assert.assertEquals(menu, bibliotecaApp.displayMenu());
     }
 

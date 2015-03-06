@@ -1,12 +1,12 @@
 package com.twu.biblioteca.Library;
 
-public class MovieItem implements LibraryItem{
+public class Movie implements LibraryItem{
     private String name;
     private Integer year;
     private String director;
     private String rating;
 
-    public MovieItem(String name, Integer year, String director, String rating) {
+    public Movie(String name, Integer year, String director, String rating) {
         this.name = name;
         this.year = year;
         this.director = director;
@@ -14,7 +14,7 @@ public class MovieItem implements LibraryItem{
     }
 
 
-    public MovieItem getMovie() {
+    public Movie getMovie() {
         return this;
     }
 

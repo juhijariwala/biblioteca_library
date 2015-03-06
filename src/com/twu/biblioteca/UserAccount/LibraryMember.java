@@ -9,15 +9,15 @@ public class LibraryMember {
     private String emailAddress;
     private String phoneNumber;
     private String password;
+    private  Role role;
 
-
-
-    public LibraryMember(String libraryID, String name, String emailAddress, String phoneNumber, String password) {
+    public LibraryMember(String libraryID, String name, String emailAddress, String phoneNumber, String password,Role role) {
         this.libraryID = libraryID;
         this.name = name;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.role=role;
     }
 
 
@@ -40,4 +40,9 @@ public class LibraryMember {
     public String getPassword() {
         return password;
     }
+
+    public String getRole() {
+        return role.toString();
+    }
+
 }

@@ -3,8 +3,6 @@ package com.twu.biblioteca.Menu.MenuItem;
 import com.twu.biblioteca.App.MemberSession;
 import com.twu.biblioteca.Library.LibraryCollection;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
-import com.twu.biblioteca.Menu.PrintFormat.PrintingFormat;
-
 import java.io.IOException;
 
 /**
@@ -17,11 +15,20 @@ public class LibraryMemberInfo implements MenuItem {
     }
 
     @Override
-    public void performAction(LibraryCollection library, PrintingFormat printingFormat, IODevice ioDevice) throws IOException {
-        String outStatement="Name : "+ memberSession.getUser().getName()+"\n";
-        outStatement+="Email : "+ memberSession.getUser().getEmailAddress()+"\n";
-        outStatement+="Phone No : "+ memberSession.getUser().getPhoneNumber()+"\n";
+    public void performAction(LibraryCollection library,IODevice ioDevice) throws IOException {
+        ioDevice.writeln("******************Member Information*****************");
+        ioDevice.writeln("Name : "+ memberSession.getUser().getName(),
+                "Email : "+ memberSession.getUser().getEmailAddress(),
+                "Phone No : "+ memberSession.getUser().getPhoneNumber());
+    }
 
-        ioDevice.writeln(outStatement);
+    @Override
+    public String printMenu() {
+        return "Member Information";
+    }
+
+    @Override
+    public boolean shouldShowMenu() {
+        return true;
     }
 }
