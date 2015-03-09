@@ -5,7 +5,7 @@ import com.twu.biblioteca.Library.*;
 import com.twu.biblioteca.Menu.MenuItem.*;
 import com.twu.biblioteca.Menu.PrintFormat.BookLibraryPrintingFormat;
 import com.twu.biblioteca.Menu.PrintFormat.BookMessageTemplate;
-import com.twu.biblioteca.Menu.PrintFormat.IODevice.ConsoleIODevice;
+import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.Menu.PrintFormat.MovieLibraryPrintingFormat;
 import com.twu.biblioteca.Menu.PrintFormat.MovieMessageTemplate;
 import com.twu.biblioteca.UserAccount.Role;
@@ -21,7 +21,7 @@ public class MenuFactory {
         this.memberSession = memberSession;
     }
 
-    public Menu createMovieMenu(LibraryCollection<Movie> movieList, ConsoleIODevice ioDevice) {
+    public Menu createMovieMenu(LibraryCollection<Movie> movieList, IODevice ioDevice) {
         MovieLibraryPrintingFormat movieLibraryPrintingFormat = new MovieLibraryPrintingFormat();
         MovieMessageTemplate movieMessageTemplate = new MovieMessageTemplate();
         Menu movieMenu = new Menu<Movie>(movieList, ioDevice, "Movie");
@@ -39,13 +39,13 @@ public class MenuFactory {
         return movieMenu;
     }
 
-    public Menu createMovieMainMenu(LibraryCollection<Movie> library, ConsoleIODevice ioDevice) {
+    public Menu createMovieMainMenu(LibraryCollection<Movie> library, IODevice ioDevice) {
         Menu<Movie> movieMainMenu = new Menu<Movie>(library, ioDevice, "Movie");
         movieMainMenu.addCommand(0, new MainMenuItem(createMovieMenu(library, ioDevice)));
         return movieMainMenu;
     }
 
-    public Menu createBookMenu(LibraryCollection<Book> bookList, ConsoleIODevice ioDevice) {
+    public Menu createBookMenu(LibraryCollection<Book> bookList, IODevice ioDevice) {
         BookLibraryPrintingFormat bookLibraryPrintingFormat = new BookLibraryPrintingFormat();
         BookMessageTemplate bookMessageTemplate = new BookMessageTemplate();
         Menu bookMenu = new Menu<Book>(bookList, ioDevice, "Book");
@@ -64,25 +64,25 @@ public class MenuFactory {
         return bookMenu;
     }
 
-    public Menu createBookMainMenu(LibraryCollection<Book> library, ConsoleIODevice ioDevice) {
+    public Menu createBookMainMenu(LibraryCollection<Book> library, IODevice ioDevice) {
         Menu<Book> bookMainMenu = new Menu<Book>(library, ioDevice, "Book");
         bookMainMenu.addCommand(0, new MainMenuItem(createBookMenu(library, ioDevice)));
         return bookMainMenu;
     }
 
-    public Menu createMemberInfoMenu(LibraryCollection<LibraryItem> library, ConsoleIODevice ioDevice) {
+    public Menu createMemberInfoMenu(LibraryCollection<LibraryItem> library, IODevice ioDevice) {
         Menu<LibraryItem> memberInfoMenuItem = new Menu<LibraryItem>(library, ioDevice, "");
         memberInfoMenuItem.addCommand(0, new SecurityMenuItem(new LibraryMemberInfo(memberSession), memberSession,Role.PUBLIC));
         return memberInfoMenuItem;
     }
 
-    public Menu createLogoutMenu(LibraryCollection<LibraryItem> library, ConsoleIODevice ioDevice) {
+    public Menu createLogoutMenu(LibraryCollection<LibraryItem> library, IODevice ioDevice) {
         Menu<LibraryItem> memberInfoMenuItem = new Menu<LibraryItem>(library, ioDevice, "");
         memberInfoMenuItem.addCommand(0, new LogoutMenuItem(memberSession));
         return memberInfoMenuItem;
     }
 
-    public MenuManager createLibraryMenu(Library library, ConsoleIODevice ioDevice) {
+    public MenuManager createLibraryMenu(Library library, IODevice ioDevice) {
 
         Menu quitMainMenu = new Menu(library.getBookLibrary(), ioDevice, "");
         quitMainMenu.addCommand(0, new QuitMenuItem());

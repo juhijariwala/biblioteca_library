@@ -33,9 +33,9 @@ public class LogoutMenuItem implements MenuItem {
 
     @Override
     public boolean shouldShowMenu() {
-        if (memberSession.getUser() != null)
-            return true;
-        else return false;
+        if (memberSession.getUser() == null)
+            return false;
+        return true;
 
     }
 }

@@ -5,8 +5,8 @@ import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Library.Movie;
 import com.twu.biblioteca.Menu.MenuFactory;
 import com.twu.biblioteca.Menu.MenuManager;
-import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.ConsoleIODevice;
+import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.UserAccount.LibraryMember;
 
 import java.io.IOException;
@@ -20,38 +20,8 @@ public class BibliotecaApp {
         this.menuManager = menuManager;
     }
 
-    public String displayWelcomeMessage() {
-        return "Welcome to Bibliotica App!!\n";
-    }
-
-    public String[] displayMenu() {
-        String menu[] = new String[]{"*************************Menu************************",
-                "|\tBook Menu:Press 1\t ",
-                "|\tMovie Menu : Press 2\t",
-                "|\tMember Information : Press 3\t",
-                "|\tLogout : Press 4\t",
-                "|	Quit : Press 0",
-                "*****************************************************",
-                "Enter your choice:" };
-
-        return menu;
-    }
-
-    public void takeUserInput(IODevice ioDevice) throws IOException {
-
-        Integer choice = -1;
-        ioDevice.writeln(displayWelcomeMessage());
-        do {
-            ioDevice.writeln(displayMenu());
-            try {
-                choice = Integer.parseInt(ioDevice.read());
-                menuManager.navigate(choice);
-            } catch (NumberFormatException e) {
-                ioDevice.writeln("Invalid Option!\n");
-            }
-
-        } while (choice != 0);
-
+    public void startApp(IODevice ioDevice) throws IOException {
+        menuManager.execute(ioDevice);
     }
 
     public static void main(String[] args) throws IOException {
@@ -77,7 +47,7 @@ public class BibliotecaApp {
         MenuFactory menuFactory = new MenuFactory(memberSessionHolder);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(menuFactory.createLibraryMenu(library, ioDevice));
-        bibliotecaApp.takeUserInput(ioDevice);
+        bibliotecaApp.startApp(ioDevice);
     }
 
     private static class MemberSessionHolder implements MemberSession {

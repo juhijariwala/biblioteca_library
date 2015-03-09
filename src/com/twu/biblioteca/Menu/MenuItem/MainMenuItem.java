@@ -29,7 +29,7 @@ public class MainMenuItem implements MenuItem<LibraryCollection>{
 
     @Override
     public String printMenu() {
-        return null;
+        return "Menu ";
     }
 
     @Override

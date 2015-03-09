@@ -11,8 +11,17 @@ import java.util.Map;
 
 public class Menu<T extends LibraryItem> {
 
+    public HashMap<Integer, MenuItem> getLibraryCommands() {
+        return libraryCommands;
+    }
+
     private HashMap<Integer, MenuItem> libraryCommands = new HashMap<Integer, MenuItem>();
     private LibraryCollection<T> library;
+
+    public String getMenuTitle() {
+        return menuTitle;
+    }
+
     private String menuTitle;
     IODevice ioDevice;
 

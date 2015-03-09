@@ -16,7 +16,6 @@ public class LibraryCollection<T extends LibraryItem> {
 
     private HashMap<LibraryMember, ArrayList<LibraryItem>> checkedOutItems = new HashMap<LibraryMember, ArrayList<LibraryItem>>();
 
-
     public void add(ArrayList<T> t) {
         itemList = t;
     }
@@ -38,7 +37,7 @@ public class LibraryCollection<T extends LibraryItem> {
 
     public T checkout(String title, LibraryMember libraryMember) {
         if (search(title).size() != 0) {
-            T t = (T) search(title).get(0);
+            T t = search(title).get(0);
 
             itemList.remove(t);
 
