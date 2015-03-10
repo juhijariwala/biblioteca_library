@@ -11,7 +11,7 @@ import java.io.IOException;
 public class QuitMenuItem implements MenuItem<LibraryCollection> {
     @Override
     public void performAction(LibraryCollection library, IODevice ioDevice) throws IOException {
-        ioDevice.writeln("Successfully Exited!!\n");
+        ioDevice.writeln("Successfully Exited!!");
     }
 
     @Override

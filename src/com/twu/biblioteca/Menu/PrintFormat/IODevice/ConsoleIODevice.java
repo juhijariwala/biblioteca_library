@@ -44,7 +44,7 @@ public class ConsoleIODevice implements IODevice {
             integerNumber = Integer.parseInt(read());
             return integerNumber;
         } catch (NumberFormatException e) {
-            writeln("Invalid Option!\n");
+            writeln("Invalid Option!");
 
         }
         return null;

@@ -1,5 +1,6 @@
 package com.twu.biblioteca.Menu.MenuItem;
 
+import com.twu.biblioteca.BookLibraryBuilder;
 import com.twu.biblioteca.Library.Book;
 import com.twu.biblioteca.Library.Library;
 import com.twu.biblioteca.Menu.Menu;
@@ -23,17 +24,11 @@ public class SearchMenuItemTest {
     @Before
     public void setUp(){
         library = new Library();
-        ArrayList<Book> bookList=new ArrayList<Book>();
-        bookList.add(new Book("book1", "author1", "date1"));
-        bookList.add(new Book("book2", "author2", "date2"));
-        bookList.add(new Book("book3", "author3", "date3"));
+        ArrayList<Book> bookList=new BookLibraryBuilder().withArraylistWithBookName("book1","book2","book3");
         library.getBookLibrary().add(bookList);
         String input = "book1";
         ioDevice=new MockIODevice(input);
         menu =new Menu(library.getBookLibrary(),ioDevice,"Movie");
-        menu.addCommand(1, new ListMenuItem(bookLibraryPrintingFormat));
-        menu.addCommand(0, new QuitMenuItem());
-        menu.addCommand(2, new SearchMenuItem(bookMessageTemplate,bookLibraryPrintingFormat));
     }
     @Test
     public void should_search_book_PerformAction() throws IOException {
@@ -45,7 +40,7 @@ public class SearchMenuItemTest {
         expectedOutput.append("******************************************************\n");
         expectedOutput.append(String.format(format, "Title", "Author", "PublishedOn"));
         expectedOutput.append("*****************************************************\n");
-        expectedOutput.append(String.format(format, "book1", "author1", "date1"));
+        expectedOutput.append(String.format(format, "book1", "author", "date"));
         Assert.assertEquals(expectedOutput.toString(),ioDevice.out.toString());
 
 

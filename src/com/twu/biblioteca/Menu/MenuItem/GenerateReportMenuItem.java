@@ -1,7 +1,6 @@
 package com.twu.biblioteca.Menu.MenuItem;
 
 import com.twu.biblioteca.Library.LibraryCollection;
-import com.twu.biblioteca.Menu.PrintFormat.IMessageTemplate;
 import com.twu.biblioteca.Menu.PrintFormat.IODevice.IODevice;
 import com.twu.biblioteca.Menu.PrintFormat.PrintingFormat;
 
@@ -13,10 +12,8 @@ import java.io.IOException;
 public class GenerateReportMenuItem implements MenuItem {
 
     private PrintingFormat printingFormat;
-    private IMessageTemplate messageTemplate;
 
-    public GenerateReportMenuItem(IMessageTemplate messageTemplate, PrintingFormat printingFormat) {
-        this.messageTemplate = messageTemplate;
+    public GenerateReportMenuItem(PrintingFormat printingFormat) {
         this.printingFormat = printingFormat;
     }
 

@@ -34,7 +34,7 @@ public class MenuFactory {
         movieCheckoutSubmenu.addCommand(1, new SearchMenuItem(movieMessageTemplate, movieLibraryPrintingFormat));
         movieCheckoutSubmenu.addCommand(2, new SecurityMenuItem(new CheckOutMenuItem(movieMessageTemplate, memberSession),memberSession,Role.PUBLIC));
         movieCheckoutSubmenu.addCommand(3,new SecurityMenuItem(
-                new GenerateReportMenuItem(movieMessageTemplate,movieLibraryPrintingFormat),memberSession,Role.LIBRARIAN));
+                new GenerateReportMenuItem(movieLibraryPrintingFormat),memberSession,Role.LIBRARIAN));
         movieCheckoutSubmenu.addCommand(0, new QuitMenuItem());
         return movieMenu;
     }
@@ -56,7 +56,7 @@ public class MenuFactory {
         Menu bookCheckoutSubmenu = new Menu<Book>(bookList, ioDevice, "Book");
         bookCheckoutSubmenu.addCommand(1, new SearchMenuItem(bookMessageTemplate, bookLibraryPrintingFormat));
         bookCheckoutSubmenu.addCommand(2,new SecurityMenuItem(new CheckOutMenuItem(bookMessageTemplate, memberSession),memberSession,Role.PUBLIC));
-        bookCheckoutSubmenu.addCommand(3,new SecurityMenuItem(new GenerateReportMenuItem(bookMessageTemplate,bookLibraryPrintingFormat),memberSession,Role.LIBRARIAN));
+        bookCheckoutSubmenu.addCommand(3,new SecurityMenuItem(new GenerateReportMenuItem(bookLibraryPrintingFormat),memberSession,Role.LIBRARIAN));
         bookCheckoutSubmenu.addCommand(0, new QuitMenuItem());
 
         CheckOutMainMenuItem checkOutMainMenuItem = new CheckOutMainMenuItem(bookCheckoutSubmenu);

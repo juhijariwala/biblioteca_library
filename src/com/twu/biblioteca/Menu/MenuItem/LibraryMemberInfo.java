@@ -16,10 +16,14 @@ public class LibraryMemberInfo implements MenuItem {
 
     @Override
     public void performAction(LibraryCollection library,IODevice ioDevice) throws IOException {
-        ioDevice.writeln("******************Member Information*****************");
-        ioDevice.writeln("Name : "+ memberSession.getUser().getName(),
-                "Email : "+ memberSession.getUser().getEmailAddress(),
-                "Phone No : "+ memberSession.getUser().getPhoneNumber());
+        if(memberSession.getUser()!=null) {
+            ioDevice.writeln("******************Member Information*****************");
+            ioDevice.writeln("Name : " + memberSession.getUser().getName(),
+                    "Email : " + memberSession.getUser().getEmailAddress(),
+                    "Phone No : " + memberSession.getUser().getPhoneNumber());
+        }
+        else ioDevice.writeln("No information is available!!");
+
     }
 
     @Override

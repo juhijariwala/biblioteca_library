@@ -14,11 +14,13 @@ public class LogoutMenuItem implements MenuItem {
         this.memberSession = memberSession;
     }
 
+
+
     @Override
     public void performAction(LibraryCollection library, IODevice ioDevice) throws IOException {
 
         if (memberSession.getUser() == null) {
-            ioDevice.writeln("You are not Logged in!!\n");
+            ioDevice.writeln("You are not Logged in!!");
         } else {
             memberSession.eraseUser();
             ioDevice.writeln("Successfully logged out!!");

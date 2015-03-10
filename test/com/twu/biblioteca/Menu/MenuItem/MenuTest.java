@@ -64,7 +64,7 @@ public class MenuTest {
         menu.addCommand(0, new QuitMenuItem());
         menu.executeCommand(0);
         final StringBuffer expectedOutput = new StringBuffer();
-        expectedOutput.append("Successfully Exited!!\n");
+        expectedOutput.append("Successfully Exited!!");
         Assert.assertEquals(expectedOutput.toString(), ioDevice.out.toString());
     }
 
@@ -139,7 +139,7 @@ public class MenuTest {
 
         menu.executeCommand(2);
         final StringBuffer expectedOutput = new StringBuffer();
-        expectedOutput.append("Successfully Exited!!\n");
+        expectedOutput.append("Successfully Exited!!");
         Assert.assertEquals(expectedOutput.toString(), ioDevice.out.toString());
     }
 

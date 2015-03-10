@@ -41,8 +41,7 @@ public class Menu<T extends LibraryItem> {
             libraryCommands.get(choice).performAction(library, ioDevice);
         } else {
 
-            String error = "Select a valid option!\n";
-            ioDevice.writeln(error);
+            ioDevice.writeln("Select a valid option!");
         }
     }
 
@@ -54,7 +53,7 @@ public class Menu<T extends LibraryItem> {
                 menuStatement += "|\t" + menuItemPair.getValue().printMenu() + " " + menuTitle + " : Press " + menuItemPair.getKey() + "\n";
             }
         }
-        menuStatement+="\nEnter your choice:";
+        menuStatement+="Enter your choice:";
 
         return menuStatement;
     }
