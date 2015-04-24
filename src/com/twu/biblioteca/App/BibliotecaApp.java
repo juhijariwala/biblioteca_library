@@ -11,7 +11,7 @@ import com.twu.biblioteca.UserAccount.LibraryMember;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
+/* starting point of application*/
 public class BibliotecaApp {
 
     private MenuManager menuManager;
